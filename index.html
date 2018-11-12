@@ -4,6 +4,7 @@
     <title>Home</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="./project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div id="grid">
@@ -27,12 +28,21 @@
       
       <nav id="navbar">
         <ul>
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-          <li><a href="#">Link 4</a></li>
+          <li class="active"><a href="./index.html">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Volunteers</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
+        <!--Disappears on homepage -->
+        <div class="search-container">
+          <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
       </nav>
+
+
       <nav id="sidebar">Sidebar</nav>
       <div id="content">Content</div>
     </div>
