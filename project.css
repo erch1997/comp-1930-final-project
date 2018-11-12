@@ -57,7 +57,8 @@
 
 #sidebar {
   grid-area: 3/1/4/2;
-  background-color: green;
+  background-color: rgb(160, 245, 160);
+  height: 100%;
 }
 
 #content {
@@ -130,4 +131,42 @@ a:visited{
 
 .dropdown:hover .dropbtn {
     background-color: #a9a9a9;
+}
+
+/*************** Sidebar stylings *******/
+
+#sidebar ul {
+  list-style-type: none;
+  margin-left: -5%;
+}
+
+#sidebar .sidenav-headings {
+  font-size: 18pt;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#sidebar li {
+  padding: 0.5em;
+}
+
+#sidebar li:hover{
+  background-color: rgb(170, 198, 235);
+}
+
+#sidebar li:active {
+  background-color: rgb(212, 212, 233);
+}
+
+#sidebar-logout {
+  padding: 0.5em;
+  margin-left: auto;
+  background-color: rgb(238, 83, 83);
+  box-shadow: 5px 10px 25px #888888;
+  
+}
+
+#sidebar-logout:active {
+  box-shadow: none;
+  color:white;
 }
