@@ -1,11 +1,16 @@
 /* CSS for COMP 1930 project. */
 
 /* Style for the div container. */
+body {
+  margin: 0;
+}
+
 #grid {
   display: grid;
-  grid-template-rows: 100px 50px 100px; 
+  grid-template-rows: 100px 50px 500px; 
   /* change width of columns here, should it be responsive? idk*/
-  grid-template-columns: auto auto; 
+  grid-template-columns: 200px auto; 
+  overflow-x: hidden;
 }
 
 #header {
@@ -57,7 +62,8 @@
 
 #sidebar {
   grid-area: 3/1/4/2;
-  background-color: green;
+  background-color: rgb(160, 245, 160);
+  height: 100%;
 }
 
 #content {
@@ -65,8 +71,10 @@
   background-color: blue;
 }
 
+/*************** Header stylings *******/
 #header .name {
     margin: auto;
+    /* CHANGE FONT OF VOLUNTEERGO HERE */
     font-family: "Arial Black", Gadget, sans-serif;
 }
 
@@ -101,7 +109,6 @@ a:visited{
     margin: auto;
     margin-right: 5%;
     display: inline-block;
-    
 }
 
 .dropdown-content {
@@ -130,4 +137,42 @@ a:visited{
 
 .dropdown:hover .dropbtn {
     background-color: #a9a9a9;
+}
+
+/*************** Sidebar stylings *******/
+
+#sidebar ul {
+  list-style-type: none;
+  margin-left: -5%;
+}
+
+#sidebar .sidenav-headings {
+  font-size: 18pt;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#sidebar li {
+  padding: 0.5em;
+}
+
+#sidebar li:hover{
+  background-color: rgb(170, 198, 235);
+}
+
+#sidebar li:active {
+  background-color: rgb(212, 212, 233);
+}
+
+#sidebar-logout {
+  padding: 0.5em;
+  margin-left: auto;
+  background-color: rgb(238, 83, 83);
+  box-shadow: 5px 10px 25px #888888;
+  
+}
+
+#sidebar-logout:active {
+  box-shadow: none;
+  color:white;
 }
