@@ -1,11 +1,16 @@
 /* CSS for COMP 1930 project. */
 
 /* Style for the div container. */
+body {
+  margin: 0;
+}
+
 #grid {
   display: grid;
-  grid-template-rows: 100px 50px 100px; 
+  grid-template-rows: 100px 50px 500px; 
   /* change width of columns here, should it be responsive? idk*/
-  grid-template-columns: auto auto; 
+  grid-template-columns: 200px auto; 
+  overflow-x: hidden;
 }
 
 #header {
