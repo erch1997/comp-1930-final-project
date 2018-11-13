@@ -71,8 +71,10 @@ body {
   background-color: blue;
 }
 
+/*************** Header stylings *******/
 #header .name {
     margin: auto;
+    /* CHANGE FONT OF VOLUNTEERGO HERE */
     font-family: "Arial Black", Gadget, sans-serif;
 }
 
@@ -107,7 +109,6 @@ a:visited{
     margin: auto;
     margin-right: 5%;
     display: inline-block;
-    
 }
 
 .dropdown-content {
