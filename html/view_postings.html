@@ -3,13 +3,73 @@
   <head>
     <title>Home</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="./project.css">
+    <link rel="stylesheet" type="text/css" href="../css/project.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
   
   <body>
+        <div id="grid">
 
+    <!-- HEADER -->
+    <header id="header">
+        <img src="../img/logo.png" class="logo" />
+        <h1 class="name">
+            <a href="./index.html"> VolunteerGo</a>
+        </h1>
+        <div class="dropdown">
+        <button class="dropbtn">Account</button>
+            <div class="dropdown-content">
+                <!-- CHANGE TO ACCOUNT?? -->
+                <a href="#">Sign In</a>
+                <a href="#">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <ul>
+        <li class="active"><a href="./index.html">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Volunteers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <!--Disappears on homepage -->
+      <div class="search-container">
+        <form action="">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- SIDE BAR --->
+    <aside id="sidebar">
+      <ul id="postings-nav"><span class="sidenav-headings">Postings</span>
+        <li><a href="./create_postings.html">Create</a></li>
+        <li><a href="./view_postings.html">View Posts</a></li>
+        <li><a href="#">Drafts</a></li>
+      </ul>
+
+      <ul id="mail-nav"><span class="sidenav-headings">Mail</span>
+        <li><a href="#">Inbox</a></li>
+        <li><a href="#">Create</a></li>
+      </ul>
+
+      <ul id="settings-nav"><span class="sidenav-headings">Settings</span>
+        <li><a href="#">Account</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+      <span id="sidebar-logout"><a href="#">LOG OUT</a></span>
+    </aside>
+
+    
+    <article id="content">
+        Put Code Here
+    </article>
+
+    </div>
   </body>
   
 </html>
