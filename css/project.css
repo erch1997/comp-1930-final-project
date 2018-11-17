@@ -5,7 +5,11 @@ body {
   margin: 0;
 }
 
-#grid {
+/*
+----- Grid Stylings -----
+*/
+
+.grid {
   display: grid;
   grid-template-rows: 100px 50px 500px; 
   /* change width of columns here, should it be responsive? idk*/
@@ -13,30 +17,38 @@ body {
   overflow-x: hidden;
 }
 
-#header {
+.header {
   display: flex;
   grid-area: 1/1/2/3;
   background-color: lightblue;
 }
 
-#navbar {
+.navbar {
   grid-area: 2/1/3/3;
   background-color: #e9e9e9;
 }
 
-#sidebar {
+.sidebar {
   grid-area: 3/1/4/2;
   background-color: rgb(160, 245, 160);
   height: 100%;
 }
 
-#content {
+.content {
   grid-area: 3/2/4/3;
   background-color: blue;
 }
 
-/*************** Navigation Bar stylings *******/
-#navbar ul {
+.homepage_content {
+  grid-area: 3/1/4/3;
+  background-color: blue;
+}
+
+/*
+----- Navbar Stylings -----
+*/
+
+.navbar ul {
   align-self: center;
   list-style-type: none;
   display: inline;
@@ -44,43 +56,46 @@ body {
   margin: 0;
 }
 
-#navbar .search-container {
+.navbar #search-container {
   float: right;
   padding: 0.88em;
 }
 
-#navbar .active {
+.navbar #active {
   background-color: #2196F3;
 }
 
-#navbar .active:hover {
+.navbar #active:hover {
   background-color: #2196F3;
 }
 
-#navbar ul li {
+.navbar ul li {
   float: left;
 
 }
 
-#navbar ul li:hover {
+.navbar ul li:hover {
   background-color: #ddd;
 }
 
-#navbar li a {
+.navbar li a {
   display: block;
   text-align: center;
   padding: 1em;
 }
 
 
-/*************** Header stylings *******/
-#header .name {
+/*
+----- Header Stylings -----
+*/
+
+.header #name {
     margin: auto;
     /* CHANGE FONT OF VOLUNTEERGO HERE */
     font-family: "Arial Black", Gadget, sans-serif;
 }
 
-#header .logo {
+.header #logo {
     height: 75px;
     width: 75px;
     margin: auto;
@@ -97,7 +112,7 @@ a:visited{
     text-decoration: none;
 }
 
-.dropbtn {
+#dropbtn {
     background-color: #aaaaaa;
     color: white;
     padding: 20%;
@@ -106,14 +121,14 @@ a:visited{
     cursor: pointer;
 }
 
-.dropdown {
+#dropdown {
     position: relative;
     margin: auto;
     margin-right: 5%;
     display: inline-block;
 }
 
-.dropdown-content {
+#dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -122,47 +137,49 @@ a:visited{
     z-index: 1;
 }
 
-.dropdown-content a {
+#dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {
+#dropdown-content a:hover {
     background-color: #f1f1f1;
 }
 
-.dropdown:hover .dropdown-content {
+#dropdown:hover #dropdown-content {
     display: block;
 }
 
-.dropdown:hover .dropbtn {
+#dropdown:hover #dropbtn {
     background-color: #a9a9a9;
 }
 
-/*************** Sidebar stylings *******/
+/*
+----- Sidebar Stylings -----
+*/
 
-#sidebar ul {
+.sidebar ul {
   list-style-type: none;
   margin-left: -5%;
 }
 
-#sidebar .sidenav-headings {
+.sidebar #sidenav-headings {
   font-size: 18pt;
   font-weight: bold;
   text-decoration: underline;
 }
 
-#sidebar li {
+.sidebar li {
   padding: 0.5em;
 }
 
-#sidebar li:hover{
+.sidebar li:hover{
   background-color: rgb(170, 198, 235);
 }
 
-#sidebar li:active {
+.sidebar li:active {
   background-color: rgb(212, 212, 233);
 }
 
@@ -178,3 +195,7 @@ a:visited{
   box-shadow: none;
   color:white;
 }
+
+/*
+----- PUT CSS CODE BELOW, DO NOT TOUCH ABOVE UNLESS SPOKEN WITH TEAM -----
+*/
