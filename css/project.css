@@ -15,7 +15,6 @@ body {
 /*
 ----- Grid Stylings -----
 */
-
 .grid {
   display: grid;
   grid-template-rows: 100px 50px 500px; 
@@ -54,7 +53,6 @@ body {
 /*
 ----- Navbar Stylings -----
 */
-
 .navbar ul {
   align-self: center;
   list-style-type: none;
@@ -95,7 +93,6 @@ body {
 /*
 ----- Header Stylings -----
 */
-
 .header #name {
     margin: auto;
     /* CHANGE FONT OF VOLUNTEERGO HERE */
@@ -166,7 +163,6 @@ a:visited{
 /*
 ----- Sidebar Stylings -----
 */
-
 .sidebar ul {
   list-style-type: none;
   margin-left: -5%;
