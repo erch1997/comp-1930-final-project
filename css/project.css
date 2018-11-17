@@ -1,6 +1,13 @@
 /* CSS for COMP 1930 project. */
 
-/* Style for the div container. */
+/*
+----- Font Links -----
+*/
+@import url('https://fonts.googleapis.com/css?family=Mitr:500');
+
+/*
+----- Div Container Stylings -----
+*/
 body {
   margin: 0;
 }
