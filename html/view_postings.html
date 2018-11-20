@@ -18,7 +18,7 @@
             <h1 id="name">
                 <a href="./index.html"> VolunteerGo</a>
             </h1>
-            <div id="account"><a href="#">SIGN OUT</a></div>
+            <button id="sign-out" class="account">SIGN OUT</button>
         </header>
 
         <!-- NAVBAR -->
@@ -60,5 +60,13 @@
         </article>
 
     </div>
+    
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript">
+    document.getElementById("sign-out").onclick = function () {
+            location.href = "./index.html";
+        };
+    </script>
+    
 </body>
 </html>
