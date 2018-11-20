@@ -4,12 +4,14 @@
 ----- Font Links -----
 */
 @import url('https://fonts.googleapis.com/css?family=Mitr:500');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /*
 ----- Div Container Stylings -----
 */
 body {
   margin: 0;
+  font-family: 'roboto';
 }
 
 /*
@@ -26,12 +28,14 @@ body {
 .header {
   display: flex;
   grid-area: 1/1/2/3;
-  background-color: lightblue;
+  /*background-color: lightblue;*/
+  background-color: #BAE1F2;
+ /* background-image: linear-gradient(to left, #BAE1F2, white);*/
 }
 
 .navbar {
   grid-area: 2/1/3/3;
-  background-color: #e9e9e9;
+  background-color: #f9f9f9;
 }
 
 .sidebar {
@@ -77,16 +81,21 @@ form.home-search input[type=text] {
   border-radius: 10px;
   background: white;
   width: 85%;
+  font-family: 'roboto';
 }
 
 form.home-search button {
   float: right;
   background: white;
-  color: #2196f3;
+  color: #BAE1F2;
   font-size: 25px;
   border: 0px solid grey;
   border-left: none;
   cursor: pointer;
+}
+
+form.home-search button:hover {
+  color: #64C2EC;
 }
 
 /*
@@ -106,11 +115,13 @@ form.home-search button {
 }
 
 .navbar #active {
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
+  background-color: #64C2EC;
 }
 
 .navbar #active:hover {
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
+  background-color: #64C2EC;
 }
 
 .navbar ul li {
@@ -119,7 +130,7 @@ form.home-search button {
 }
 
 .navbar ul li:hover {
-  background-color: #ddd;
+  background-color: #dadbdf;
 }
 
 .navbar li a {
@@ -135,12 +146,13 @@ form.home-search button {
 .header #name {
     margin: auto;
     /* CHANGE FONT OF VOLUNTEERGO HERE */
-    font-family: "Arial Black", Gadget, sans-serif;
+    font-family: "mitr", Gadget, sans-serif;
+    font-size: 40pt;
 }
 
 .header #logo {
     height: 75px;
-    width: 75px;
+    width: auto;
     margin: auto;
     margin-left: 5%;
 }
@@ -160,9 +172,13 @@ a:visited{
   margin: auto;
   position: relative;
   margin-right: 5%;
-  background-color: rgb(238, 83, 83);
-  box-shadow: 5px 10px 25px #888888;
-  
+  /*background-color: rgb(238, 83, 83);*/
+  background-color: #F74356;
+  box-shadow: 5px 10px 25px #888888;  
+}
+
+#account a {
+  color: white;
 }
 
 .account:active {
