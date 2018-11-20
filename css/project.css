@@ -45,9 +45,48 @@ body {
   background-color: blue;
 }
 
+/*
+----- Homepage Stylings -----
+*/
+
 .homepage_content {
   grid-area: 3/1/4/3;
-  background-color: blue;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form.home-search {
+  flex-basis: 45%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+}
+
+form.home-search:hover {
+  box-shadow: 0px 0px 10px #b3b3b3;
+  transform: scale(1.0005);
+}
+
+form.home-search input[type=text] {
+  padding-left: 10px;
+  font-size: 25px;
+  border: 0px solid grey;
+  border-radius: 10px;
+  background: white;
+  width: 85%;
+}
+
+form.home-search button {
+  float: right;
+  background: white;
+  color: #2196f3;
+  font-size: 25px;
+  border: 0px solid grey;
+  border-left: none;
+  cursor: pointer;
 }
 
 /*
