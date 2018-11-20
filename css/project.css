@@ -28,9 +28,7 @@ body {
 .header {
   display: flex;
   grid-area: 1/1/2/3;
-  /*background-color: lightblue;*/
-  background-color: #BAE1F2;
- /* background-image: linear-gradient(to left, #BAE1F2, white);*/
+  background-color: #AAC4D1;
 }
 
 .navbar {
@@ -55,7 +53,9 @@ body {
 
 .homepage_content {
   grid-area: 3/1/4/3;
-  background-color: white;
+  /*background-color: white;*/
+  background: url('../img/index_background.jpg') no-repeat fixed center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,15 +63,16 @@ body {
 
 form.home-search {
   flex-basis: 45%;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 10px;
   border-radius: 50px;
-  border: 1px solid #ccc;
+  border: 0px solid white;
 }
 
 form.home-search:hover {
   box-shadow: 0px 0px 10px #b3b3b3;
   transform: scale(1.0005);
+  background-color: rgba(255, 255, 255, 0.9)
 }
 
 form.home-search input[type=text] {
@@ -79,19 +80,21 @@ form.home-search input[type=text] {
   font-size: 25px;
   border: 0px solid grey;
   border-radius: 10px;
-  background: white;
+  /*background: white;*/
   width: 85%;
   font-family: 'roboto';
+  background-color: rgba(255, 255, 255, 0);
 }
 
 form.home-search button {
   float: right;
-  background: white;
+  /*background: white;*/
   color: #BAE1F2;
   font-size: 25px;
   border: 0px solid grey;
   border-left: none;
   cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 form.home-search button:hover {
@@ -167,21 +170,19 @@ a:visited{
     text-decoration: none;
 }
 
-.account {
-  padding: 0.75em;
+.header .account {
+  padding: 1em;
   margin: auto;
   position: relative;
   margin-right: 5%;
-  /*background-color: rgb(238, 83, 83);*/
-  background-color: #F74356;
+  background-color: #F5C401;
   box-shadow: 5px 10px 25px #888888;  
-}
-
-#account a {
+  border: none;
   color: white;
+  font-family: 'roboto';
 }
 
-.account:active {
+.header .account:active {
   box-shadow: none;
   color:white;
 }
