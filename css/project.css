@@ -202,3 +202,11 @@ a:visited{
 /*
 ----- PUT CSS CODE BELOW, DO NOT TOUCH ABOVE UNLESS SPOKEN WITH TEAM -----
 */
+
+
+/*
+----------------- Create Postings Stylings -------------
+*/
+.hidden-unless-selected {
+  display: none;
+}
