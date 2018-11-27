@@ -4,12 +4,14 @@
 ----- Font Links -----
 */
 @import url('https://fonts.googleapis.com/css?family=Mitr:500');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /*
 ----- Div Container Stylings -----
 */
 body {
   margin: 0;
+  font-family: 'roboto';
 }
 
 /*
@@ -26,12 +28,12 @@ body {
 .header {
   display: flex;
   grid-area: 1/1/2/3;
-  background-color: lightblue;
+  background-color: #AAC4D1;
 }
 
 .navbar {
   grid-area: 2/1/3/3;
-  background-color: #e9e9e9;
+  background-color: #f9f9f9;
 }
 
 .sidebar {
@@ -45,9 +47,58 @@ body {
   background-color: blue;
 }
 
+/*
+----- Homepage Stylings -----
+*/
+
 .homepage_content {
   grid-area: 3/1/4/3;
-  background-color: blue;
+  /*background-color: white;*/
+  background: url('../img/index_background.jpg') no-repeat fixed center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form.home-search {
+  flex-basis: 45%;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px;
+  border-radius: 50px;
+  border: 0px solid white;
+}
+
+form.home-search:hover {
+  box-shadow: 0px 0px 10px #b3b3b3;
+  transform: scale(1.0005);
+  background-color: rgba(255, 255, 255, 0.9)
+}
+
+form.home-search input[type=text] {
+  padding-left: 10px;
+  font-size: 25px;
+  border: 0px solid grey;
+  border-radius: 10px;
+  /*background: white;*/
+  width: 85%;
+  font-family: 'roboto';
+  background-color: rgba(255, 255, 255, 0);
+}
+
+form.home-search button {
+  float: right;
+  /*background: white;*/
+  color: #BAE1F2;
+  font-size: 25px;
+  border: 0px solid grey;
+  border-left: none;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+form.home-search button:hover {
+  color: #64C2EC;
 }
 
 /*
@@ -67,11 +118,13 @@ body {
 }
 
 .navbar #active {
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
+  background-color: #64C2EC;
 }
 
 .navbar #active:hover {
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
+  background-color: #64C2EC;
 }
 
 .navbar ul li {
@@ -80,7 +133,7 @@ body {
 }
 
 .navbar ul li:hover {
-  background-color: #ddd;
+  background-color: #dadbdf;
 }
 
 .navbar li a {
@@ -96,12 +149,13 @@ body {
 .header #name {
     margin: auto;
     /* CHANGE FONT OF VOLUNTEERGO HERE */
-    font-family: "Arial Black", Gadget, sans-serif;
+    font-family: "mitr", Gadget, sans-serif;
+    font-size: 40pt;
 }
 
 .header #logo {
     height: 75px;
-    width: 75px;
+    width: auto;
     margin: auto;
     margin-left: 5%;
 }
@@ -116,48 +170,21 @@ a:visited{
     text-decoration: none;
 }
 
-#dropbtn {
-    background-color: #aaaaaa;
-    color: white;
-    padding: 20%;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+.header .account {
+  padding: 1em;
+  margin: auto;
+  position: relative;
+  margin-right: 5%;
+  background-color: #F5C401;
+  box-shadow: 5px 10px 25px #888888;  
+  border: none;
+  color: white;
+  font-family: 'roboto';
 }
 
-#dropdown {
-    position: relative;
-    margin: auto;
-    margin-right: 5%;
-    display: inline-block;
-}
-
-#dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-#dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-#dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-#dropdown:hover #dropdown-content {
-    display: block;
-}
-
-#dropdown:hover #dropbtn {
-    background-color: #a9a9a9;
+.header .account:active {
+  box-shadow: none;
+  color:white;
 }
 
 /*
@@ -198,6 +225,19 @@ a:visited{
   box-shadow: none;
   color:white;
 }
+
+
+/*
+----- LANDING PAGE STYLNGS -----
+*/
+
+#landing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44pt;
+}
+
 
 /*
 ----- PUT CSS CODE BELOW, DO NOT TOUCH ABOVE UNLESS SPOKEN WITH TEAM -----

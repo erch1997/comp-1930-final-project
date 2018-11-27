@@ -18,13 +18,7 @@
             <h1 id="name">
                 <a href="./index.html"> VolunteerGo</a>
             </h1>
-            <div id="dropdown">
-            <button id="dropbtn">Account</button>
-                <div id="dropdown-content">
-                    <a href="#">Sign In</a>
-                    <a href="#">Sign Up</a>
-                </div>
-            </div>
+            <button id="sign-in" class="account">SIGN IN</button>
         </header>
 
         <!-- NAVBAR -->
@@ -39,9 +33,20 @@
 
         <!-- CONTENT -->
         <article class="homepage_content">
-            Homepage (index.html)
+          <form class="home-search" action="action_page.php">
+            <input type="text" placeholder="Search for opportunities" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
         </article>
 
     </div>
+    
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript">
+    document.getElementById("sign-in").onclick = function () {
+            location.href = "./login.html";
+        };
+    </script>
+    
 </body>
 </html>
