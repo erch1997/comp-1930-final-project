@@ -55,7 +55,8 @@ body {
   grid-area: 3/1/4/3;
   /*background-color: white;*/
   background: url('../img/index_background.jpg') no-repeat fixed center;
-  background-size: cover;
+  background-size: 120%;
+  background-position: -100px;
   display: flex;
   align-items: center;
   justify-content: center;
