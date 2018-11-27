@@ -187,6 +187,11 @@ a:visited{
   color:white;
 }
 
+.header #empty {
+  background-color: #AAC4D1;
+  box-shadow: none;
+}
+
 
 /*
 ----- Sidebar Stylings -----
