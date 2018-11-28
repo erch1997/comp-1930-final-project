@@ -1,9 +1,10 @@
 {
-  "accounts" : {
-    "big siblings" : {
+  "users" : {
+    "bbt" : {
       "activePosts" : [ 1234569 ],
-      "email" : "bigsiblings@fakemail.com",
-      "inactivePosts" : [ 1000002, 1000003 ]
+      "email" : "bbt@bbt.ca",
+      "inactivePosts" : [ 1000002, 1000003 ],
+      "uid" : "M4zCrp229tN80iwhrcntijP2tpv2"
     },
     "red cross" : {
       "activePosts" : [ 1234567, 1234568 ],

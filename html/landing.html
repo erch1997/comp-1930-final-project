@@ -7,22 +7,12 @@
   <link rel="stylesheet" type="text/css" href="../css/project.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBwkzTE8ITt7GNesfRDgZ3W81l_8m3speQ",
-      authDomain: "comp1930-project-b6b53.firebaseapp.com",
-      databaseURL: "https://comp1930-project-b6b53.firebaseio.com",
-      projectId: "comp1930-project-b6b53",
-      storageBucket: "comp1930-project-b6b53.appspot.com",
-      messagingSenderId: "512590927196"
-    };
-    firebase.initializeApp(config);
-  </script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  
 </head>
 
 <body>
+  <script src="../js/load-firebase.js"></script>
     <div class="grid">
 
         <!-- HEADER -->
@@ -69,7 +59,7 @@
 
         <!-- CONTENT -->
         <article class="content" id="landing">
-            Hello ____, What would you like to do today?
+            <div>Hello <span id="userName">____</span>, What would you like to do today?</div>
             <!-- ADD USER'S NAME-->
         </article>
 
@@ -77,10 +67,11 @@
     
     <!-- JAVASCRIPT -->
     <script type="text/javascript">
-    document.getElementById("sign-out").onclick = function () {
-            location.href = "./index.html";
-        };
+      document.getElementById("sign-out").onclick = function () {
+        location.href = "./index.html";
+      };
     </script>
-    
+    <!--Adds authenticated user to database--> 
+    <script src="../js/add-user.js"></script>
 </body>
 </html>
