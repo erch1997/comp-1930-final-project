@@ -59,7 +59,7 @@
 
         <!-- CONTENT -->
         <article class="content" id="landing">
-            <div>Hello <span id="userName">____</span>, What would you like to do today?</div>
+            <div>Hello <span id="userName">____</span>, what would you like to do today?</div>
             <!-- ADD USER'S NAME-->
         </article>
 
@@ -71,7 +71,23 @@
         location.href = "./index.html";
       };
     </script>
+    
     <!--Adds authenticated user to database--> 
     <script src="../js/add-user.js"></script>
+    <script>
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          var output = document.getElementById('userName');
+          var dbRef = firebase.database().ref("users/"+user.uid).child("name");
+          output.innerText = "";
+          dbRef.once('value', function(snapshot) {
+            var childData = snapshot.val();
+            console.log(childData);
+            output.innerText += (childData);
+          }); 
+        }
+      });
+    
+    </script>
 </body>
 </html>
