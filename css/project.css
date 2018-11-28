@@ -1,10 +1,12 @@
 /* CSS for COMP 1930 project. */
 
+
 /*
 ----- Font Links -----
 */
 @import url('https://fonts.googleapis.com/css?family=Mitr:500');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
 
 /*
 ----- Div Container Stylings -----
@@ -13,6 +15,7 @@ body {
   margin: 0;
   font-family: 'roboto';
 }
+
 
 /*
 ----- Grid Stylings -----
@@ -44,16 +47,17 @@ body {
 
 .content {
   grid-area: 3/2/4/3;
-  background-color: blue;
+  background-color: lightgrey;
+  /** CHANGE FONT OF CONTENT HERE **/
+  font-family: "mitr", Gadget, sans-serif;
 }
+
 
 /*
 ----- Homepage Stylings -----
 */
-
 .homepage_content {
   grid-area: 3/1/4/3;
-  /*background-color: white;*/
   background: url('../img/index_background.jpg') no-repeat fixed center;
   background-size: 120%;
   background-position: -100px;
@@ -81,7 +85,6 @@ form.home-search input[type=text] {
   font-size: 25px;
   border: 0px solid grey;
   border-radius: 10px;
-  /*background: white;*/
   width: 85%;
   font-family: 'roboto';
   background-color: rgba(255, 255, 255, 0);
@@ -89,7 +92,6 @@ form.home-search input[type=text] {
 
 form.home-search button {
   float: right;
-  /*background: white;*/
   color: #BAE1F2;
   font-size: 25px;
   border: 0px solid grey;
@@ -101,6 +103,7 @@ form.home-search button {
 form.home-search button:hover {
   color: #64C2EC;
 }
+
 
 /*
 ----- Navbar Stylings -----
@@ -119,12 +122,10 @@ form.home-search button:hover {
 }
 
 .navbar #active {
-  /*background-color: #2196F3;*/
   background-color: #64C2EC;
 }
 
 .navbar #active:hover {
-  /*background-color: #2196F3;*/
   background-color: #64C2EC;
 }
 
@@ -149,7 +150,6 @@ form.home-search button:hover {
 */
 .header #name {
     margin: auto;
-    /* CHANGE FONT OF VOLUNTEERGO HERE */
     font-family: "mitr", Gadget, sans-serif;
     font-size: 40pt;
 }
@@ -187,6 +187,12 @@ a:visited{
   box-shadow: none;
   color:white;
 }
+
+.header #empty {
+  background-color: #AAC4D1;
+  box-shadow: none;
+}
+
 
 /*
 ----- Sidebar Stylings -----
@@ -231,7 +237,6 @@ a:visited{
 /*
 ----- LANDING PAGE STYLNGS -----
 */
-
 #landing {
     display: flex;
     align-items: center;
@@ -242,12 +247,7 @@ a:visited{
 
 
 /*
------ PUT CSS CODE BELOW, DO NOT TOUCH ABOVE UNLESS SPOKEN WITH TEAM -----
-*/
-
-
-/*
------------------ Create Postings Stylings -------------
+----- CREATE POSTINGS PAGE STYLNGS -----
 */
 .hidden-unless-selected {
   display: none;
