@@ -19,7 +19,7 @@ body {
 */
 .grid {
   display: grid;
-  grid-template-rows: 100px 50px 500px; 
+  grid-template-rows: 100px 50px 100vh; 
   /* change width of columns here, should it be responsive? idk*/
   grid-template-columns: 200px auto; 
   overflow-x: hidden;
@@ -44,7 +44,7 @@ body {
 
 .content {
   grid-area: 3/2/4/3;
-  background-color: blue;
+  background-color: #AAC4D1;
 }
 
 /*
@@ -254,4 +254,11 @@ a:visited{
 */
 .hidden-unless-selected {
   display: none;
+}
+
+.content #post-creation-form input[type=text]{
+  padding: 1em;
+  width: 300px;
+  vertical-align: text-top;
+
 }
