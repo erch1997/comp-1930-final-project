@@ -65,6 +65,7 @@
     <!-- JAVASCRIPT -->
     <script type="text/javascript">
     document.getElementById("sign-out").onclick = function () {
+            firebase.auth().signOut()
             location.href = "./index.html";
         };
     </script>
