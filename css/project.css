@@ -48,6 +48,7 @@ body {
 .content {
   grid-area: 3/2/4/3;
   background-color: lightgrey;
+  padding: 1em;
   /** CHANGE FONT OF CONTENT HERE **/
   font-family: "mitr", Gadget, sans-serif;
 }

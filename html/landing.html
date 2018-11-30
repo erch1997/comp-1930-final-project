@@ -59,7 +59,7 @@
 
         <!-- CONTENT -->
         <article class="content" id="landing">
-            <div>Hello <span id="userName">____</span>, what would you like to do today?</div>
+            <div>Hello <span id="userName"></span>, what would you like to do today?</div>
             <!-- ADD USER'S NAME-->
         </article>
 
@@ -68,6 +68,7 @@
     <!-- JAVASCRIPT -->
     <script type="text/javascript">
       document.getElementById("sign-out").onclick = function () {
+        firebase.auth().signOut()
         location.href = "./index.html";
       };
     </script>
