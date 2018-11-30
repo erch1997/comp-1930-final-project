@@ -1,22 +1,9 @@
 {
-  "users" : {
-    "bbt" : {
-      "activePosts" : [ 1234569 ],
-      "email" : "bbt@bbt.ca",
-      "inactivePosts" : [ 1000002, 1000003 ],
-      "uid" : "M4zCrp229tN80iwhrcntijP2tpv2"
-    },
-    "red cross" : {
-      "activePosts" : [ 1234567, 1234568 ],
-      "email" : "redcross@fakemail.com",
-      "inactivePosts" : [ 1000001 ]
-    }
-  },
   "activePosts" : {
     "1234567" : {
       "dates" : "dec 12, 2018",
       "description" : "sun run description here",
-      "email" : "redcross@fakemail.com",
+      "email" : "volunteertest@test.ca",
       "requirements" : "sun run requirements here",
       "tags" : [ "health", "fitness", "red cross", "sun run" ],
       "title" : "Red Cross Sun Run"
@@ -62,6 +49,30 @@
       "requirements" : "camp counsellor requirements here",
       "tags" : [ "summer", "camp", "big siblings", "counsellor" ],
       "title" : "Big Siblings Camp Counsellor Position"
+    }
+  },
+  "users" : {
+    "MR3xlHkanUOY96zTDbUtRtmI8W13" : {
+      "activePosts" : [ 1234568, 1234567 ],
+      "email" : "vickytest@test.ca",
+      "inactivePosts" : [ 1000003 ],
+      "name" : "vicky test"
+    },
+    "qeY0iS4zPgYsVf5AYaGIKub7RTt2" : {
+      "email" : "eric@eric.com",
+      "name" : "eric"
+    },
+    "sFscl20MV5h8qWba7uITLjlVbzf2" : {
+      "email" : "mapl.layon@gmail.com",
+      "name" : "Mikhaela Layon"
+    },
+    "useriud" : {
+      "email" : "test@test.ca",
+      "name" : "test"
+    },
+    "vILKU9G31CRor24ydDM5fN8NrHb2" : {
+      "email" : "volunteertest@test.ca",
+      "name" : "Volunteer Test"
     }
   }
 }

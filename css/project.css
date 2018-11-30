@@ -252,3 +252,12 @@ a:visited{
 .hidden-unless-selected {
   display: none;
 }
+
+/*
+----- VIEW POSTINGS PAGE STYLINGS -----
+*/
+.posts {
+  background-color: red;
+  margin: 1em;
+  padding: 1em;
+}
