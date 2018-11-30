@@ -257,6 +257,16 @@ a:visited{
 /*
 ----- VIEW POSTINGS PAGE STYLINGS -----
 */
+
+.hidden-unless-selected {
+  display: none;
+}
+
+.content #post-creation-form input[type=text]{
+  padding: 1em;
+  width: 300px;
+  vertical-align: text-top;
+
 .posts {
   background-color: red;
   margin: 1em;
