@@ -71,15 +71,16 @@
         </div>
       </div>
     </article>
-
   </div>
   
   <!-- JAVASCRIPT -->
   <script type="text/javascript">
   document.getElementById("sign-out").onclick = function () {
-      location.href = "./index.html";
-    };
+          firebase.auth().signOut()
+          location.href = "./index.html";
+      };
   </script>
+
   <script type="text/javascript">
     firebase.auth().onAuthStateChanged(function(user){
       var activePosts = document.getElementById('active-posts');
