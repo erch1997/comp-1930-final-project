@@ -7,68 +7,137 @@
   <link rel="stylesheet" type="text/css" href="../css/project.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
 </head>
 
 <body>
-    <script src="../js/load-firebase.js"></script>
-    <div class="grid">
+  <script src="../js/load-firebase.js"></script>
+  <div class="grid">
 
-        <!-- HEADER -->
-        <header class="header">
-            <img src="../img/logo.png" id="logo" />
-            <h1 id="name">
-                <a href="./index.html"> VolunteerGo</a>
-            </h1>
-            <button id="sign-out" class="account">SIGN OUT</button>
-        </header>
+    <!-- HEADER -->
+    <header class="header">
+      <img src="../img/logo.png" id="logo" />
+      <h1 id="name">
+        <a href="./index.html"> VolunteerGo</a>
+      </h1>
+      <button id="sign-out" class="account">SIGN OUT</button>
+    </header>
 
-        <!-- NAVBAR -->
-        <nav class="navbar">
-            <ul>
-                <li id="active"><a href="./index.html">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Volunteers</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div id="search-container">
-                <form action="">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
-            </div>
-        </nav>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <ul>
+        <li id="active"><a href="./index.html">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Volunteers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div id="search-container">
+        <form action="">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </nav>
 
-        <!-- SIDE BAR --->
-        <aside class="sidebar">
-            <ul id="postings-nav"><span id="sidenav-headings">Postings</span>
-                <li><a href="./create_postings.html">Create</a></li>
-                <li><a href="./view_postings.html">View Posts</a></li>
-                <li><a href="#">Drafts</a></li>
-            </ul>
-            <ul id="mail-nav"><span id="sidenav-headings">Mail</span>
-                <li><a href="#">Inbox</a></li>
-                <li><a href="#">Create</a></li>
-            </ul>
-            <ul id="settings-nav"><span id="sidenav-headings">Settings</span>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Privacy</a></li>
-            </ul>
-        </aside>
+    <!-- SIDE BAR --->
+    <aside class="sidebar">
+      <ul id="postings-nav"><span id="sidenav-headings">Postings</span>
+        <li><a href="./create_postings.html">Create</a></li>
+        <li><a href="./view_postings.html">View Posts</a></li>
+        <li><a href="#">Drafts</a></li>
+      </ul>
+      <ul id="mail-nav"><span id="sidenav-headings">Mail</span>
+        <li><a href="#">Inbox</a></li>
+        <li><a href="#">Create</a></li>
+      </ul>
+      <ul id="settings-nav"><span id="sidenav-headings">Settings</span>
+        <li><a href="#">Account</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </aside>
 
-        <!-- CONTENT -->
-        <article class="content">
-            View Postings
-        </article>
+    <!-- CONTENT -->
+    <article class="content">
+      <div id="active-container">
+        Active
+        <div id="active-posts">
+          Nothing here!
+        </div>
+      </div>
+      <div id="inactive-container">
+        Inactive
+        <div id="inactive-posts">
+          Nothing here!
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  <!-- JAVASCRIPT -->
+  <script type="text/javascript">
+  document.getElementById("sign-out").onclick = function () {
+          firebase.auth().signOut()
+          location.href = "./index.html";
+      };
+  </script>
 
-    </div>
-    
-    <!-- JAVASCRIPT -->
-    <script type="text/javascript">
-    document.getElementById("sign-out").onclick = function () {
-            firebase.auth().signOut()
-            location.href = "./index.html";
-        };
-    </script>
-    
+  <script type="text/javascript">
+    firebase.auth().onAuthStateChanged(function(user){
+      var activePosts = document.getElementById('active-posts');
+      var inactivePosts = document.getElementById('inactive-posts');
+      var dbActivePosts = firebase.database().ref('activePosts');
+      var dbInactivePosts = firebase.database().ref('inactivePosts');
+      if (user) {
+        var userPosts = firebase.database().ref('users/' + user.uid).child('activePosts');
+        var userInactive = firebase.database().ref('users/'+user.uid).child('inactivePosts');
+
+        if (userPosts.length != 0) {
+          activePosts.innerHTML = "";
+        }
+        if (userInactive.length != 0) {
+          inactivePosts.innerHTML = "";
+        }
+
+        /* Shows active posts for user */
+        dbActivePosts.once('value', function(snapshot) {
+          snapshot.forEach(function(postId) {
+            userPosts.once('value', function(snap) {
+              snap.forEach(function(userPostId) {
+                var id = userPostId.val();
+                if (id == postId.key) {
+                  console.log(userPostId.val() + " matches " + postId.key);
+                  postId.forEach(function(title) {
+                    if (title.key == 'title') {
+                      console.log(title.val());
+                      activePosts.innerHTML += ("<div class='posts'>" + title.val() + "</div>");
+                    }
+                  });
+                }
+              })
+            })
+          });
+        });
+
+        /* Shows inactive posts for user */
+        dbInactivePosts.once('value', function(snapshot) {
+          snapshot.forEach(function(postId) {
+            userInactive.once('value', function(snap) {
+              snap.forEach(function(userPostId) {
+                var id = userPostId.val();
+                if (id == postId.key) {
+                  console.log(userPostId.val() + " matches " + postId.key);
+                  postId.forEach(function(title) {
+                    if (title.key == 'title') {
+                      inactivePosts.innerHTML += ("<div class='posts'>" + title.val() + "</div>");
+                    }
+                  })
+                }
+              })
+            })
+          })
+        })
+      }
+    });
+  </script>
 </body>
 </html>

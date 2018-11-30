@@ -83,8 +83,17 @@
           output.innerText = "";
           dbRef.once('value', function(snapshot) {
             var childData = snapshot.val();
-            console.log(childData);
-            output.innerText += (childData);
+            var count = 0;
+            for (var i = 0; i < childData.length; i++) {
+              if (childData.charAt(i) != " ") {
+                count++;
+              } else {
+                i = childData.length;
+              }
+            }
+            var first = childData.charAt(0).toUpperCase() + childData.substring(1, count);
+            console.log(first);
+            output.innerText += (first);
           }); 
         }
       });
