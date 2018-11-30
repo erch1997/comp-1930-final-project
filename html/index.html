@@ -7,9 +7,11 @@
   <link rel="stylesheet" type="text/css" href="../css/project.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
 </head>
 
 <body>
+    <script src="../js/load-firebase.js"></script>
     <div class="grid">
 
         <!-- HEADER -->
@@ -33,7 +35,7 @@
 
         <!-- CONTENT -->
         <article class="homepage_content">
-          <form class="home-search" action="action_page.php">
+          <form class="home-search" action="https://google.ca">
             <input type="text" placeholder="Search for opportunities" name="search">
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
@@ -43,7 +45,7 @@
     
     <!-- JAVASCRIPT -->
     <script type="text/javascript">
-    document.getElementById("sign-in").onclick = function () {
+        document.getElementById("sign-in").onclick = function () {
             location.href = "./login.html";
         };
     </script>
