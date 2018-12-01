@@ -18,7 +18,7 @@
     <header class="header">
       <img src="../img/logo.png" id="logo" />
       <h1 id="name">
-        <a href="./index.html"> VolunteerGo</a>
+        <a href="./index.html">VolunteerGo</a>
       </h1>
       <button id="sign-out" class="account">SIGN OUT</button>
     </header>
@@ -59,13 +59,13 @@
 
     <!-- CONTENT -->
     <article class="content">
-      <div id="active-container">
+      <div id="active-container" class="post-container">
         Active
         <div id="active-posts">
           Nothing here!
         </div>
       </div>
-      <div id="inactive-container">
+      <div id="inactive-container" class="post-container">
         Inactive
         <div id="inactive-posts">
           Nothing here!
@@ -76,12 +76,13 @@
   
   <!-- JAVASCRIPT -->
   <script type="text/javascript">
-  document.getElementById("sign-out").onclick = function () {
-          firebase.auth().signOut()
-          location.href = "./index.html";
-      };
+    document.getElementById("sign-out").onclick = function () {
+      firebase.auth().signOut()
+      location.href = "./index.html";
+    };
   </script>
 
+  <!-- Shows active and inactive posts for user -->
   <script type="text/javascript">
     firebase.auth().onAuthStateChanged(function(user){
       var activePosts = document.getElementById('active-posts');
@@ -110,7 +111,12 @@
                   postId.forEach(function(title) {
                     if (title.key == 'title') {
                       console.log(title.val());
-                      activePosts.innerHTML += ("<div class='posts'>" + title.val() + "</div>");
+                      var postDiv = $("<div class='posts'></div>");
+                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>" 
+                        + title.val() + "</a>");
+                      $(postDiv).append(postTitle);
+                      $(activePosts).append(postDiv);
+                      $(postTitle).attr("id", postId.key);
                     }
                   });
                 }
@@ -129,7 +135,13 @@
                   console.log(userPostId.val() + " matches " + postId.key);
                   postId.forEach(function(title) {
                     if (title.key == 'title') {
-                      inactivePosts.innerHTML += ("<div class='posts'>" + title.val() + "</div>");
+                      console.log(title.val());
+                      var postDiv = $("<div class='posts'></div>");
+                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>" 
+                        + title.val() + "</a>");
+                      $(postDiv).append(postTitle);
+                      $(inactivePosts).append(postDiv);
+                      $(postTitle).attr("id", postId.key);
                     }
                   })
                 }
@@ -139,6 +151,16 @@
         })
       }
     });
+  </script>
+  <script type="text/javascript">
+    function setPreview(postId) {
+      firebase.auth().onAuthStateChanged(function(user){
+        var userPreview = firebase.database().ref('users/' + user.uid);
+        if (user) {
+          userPreview.update({preview : postId});
+        }
+      });
+    }
   </script>
 </body>
 </html>

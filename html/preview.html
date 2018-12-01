@@ -59,7 +59,16 @@
 
         <!-- CONTENT -->
         <article class="content">
-            Preview Page
+            <h1 id="post-title">Title</h1>
+            <section id="dates-container">
+                <h1 id="post-dates">Dates</h1>
+            </section>
+            <section id="descript-container">
+                <h1 id="post-descript">Description</h1>
+            </section>
+            <section id="req-container">
+                <h1 id="post-req">Requirements</h1>
+            </section>
         </article>
 
     </div>
@@ -70,6 +79,83 @@
             firebase.auth().signOut()
             location.href = "./index.html";
         };
+    </script>
+
+    <!--Gets the post id of post clicked from view_postings and shows post on page-->
+    <script>
+        firebase.auth().onAuthStateChanged(function(user){
+            if (user) {
+                var userPreview = firebase.database().ref('users/' + user.uid).child('preview');
+                var userPosts = firebase.database().ref('users/' + user.uid).child('activePosts');
+                var userInactive = firebase.database().ref('users/'+user.uid).child('inactivePosts');
+                var dbActivePosts = firebase.database().ref('activePosts');
+                var dbInactivePosts = firebase.database().ref('inactivePosts'); 
+                dbActivePosts.once('value', function(snapshot) {
+                    snapshot.forEach(function(postId) {
+                        postId.forEach(function(postInfo) {
+                            userPreview.once('value', function(prev) {
+                                var title = $('#post-title');
+                                var postDates = $('#dates-container');
+                                var description = $('#descript-container');
+                                var requirements = $('#req-container');
+
+                                if (postId.key == prev.val()) {
+                                    let pInfo = postInfo.key;
+                                    let value = postInfo.val();
+                                    switch (pInfo) {
+                                        case 'title':
+                                            title.html(value);
+                                            break;
+                                        case 'dates':
+                                            postDates.append(value);
+                                            break;
+                                        case 'description':
+                                            description.append(value);
+                                            break;
+                                        case 'requirements':
+                                            requirements.append(value);
+                                        default:
+                                            break;
+                                    }    
+                                }
+                            });
+                        });  
+                    });
+                });
+                dbInactivePosts.once('value', function(snapshot) {
+                    snapshot.forEach(function(postId) {
+                        postId.forEach(function(postInfo) {
+                            userPreview.once('value', function(prev) {
+                                var title = $('#post-title');
+                                var postDates = $('#dates-container');
+                                var description = $('#descript-container');
+                                var requirements = $('#req-container');
+
+                                if (postId.key == prev.val()) {
+                                    let pInfo = postInfo.key;
+                                    let value = postInfo.val();
+                                    switch (pInfo) {
+                                        case 'title':
+                                            title.html(value);
+                                            break;
+                                        case 'dates':
+                                            postDates.append(value);
+                                            break;
+                                        case 'description':
+                                            description.append(value);
+                                            break;
+                                        case 'requirements':
+                                            requirements.append(value);
+                                        default:
+                                            break;
+                                    }     
+                                }
+                            });
+                        });  
+                    });
+                });
+            }  
+        });
     </script>
     
 </body>
