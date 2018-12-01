@@ -17,6 +17,11 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
+    <!-- Links for Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>    
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
 </head>
 
 <body>
@@ -88,8 +93,7 @@
                     <br>
 
                     <!-- Single Date Picker -->
-                    <input type="text" name="date" value="11/24/1984" />
-
+                    <input type="text" id="date" name="date" value="11/24/1984" />
                     <script>
                         $(function () {
                             $('input[name="date"]').daterangepicker({
@@ -108,9 +112,9 @@
                 <div class="hidden-unless-selected" id="continuous-div">
                     Pick a date range
                     <br>
-                    <input type="text" name="daterange" value="01/01/2018 - 11/24/2018" />
 
                     <!-- Date range picker -->
+                    <input type="text" id="daterange" name="daterange" value="01/01/2018 - 11/24/2018" />
                     <script>
                         $(function () {
                             $('input[name="daterange"]').daterangepicker({
@@ -135,9 +139,9 @@
                 <!-- Skills Description fields -->
                 <br>
                 <label>Is this a skilled position? </label> <br>
-                <label>Yes <input type="radio" name="skilled-choice" id="skilled-yes" value="skilledyes" onclick="showSkillsDescription();" />
+                <label>Yes <input type="radio" name="skilled-choice" id="skilled-yes" value="yes" onclick="showSkillsDescription();" />
                 </label>
-                <label>No <input type="radio" name="skilled-choice" id="skilled-no" value="skilled-no" onclick="hideSkillsDescription();" />
+                <label>No <input type="radio" name="skilled-choice" id="skilled-no" value="no" onclick="hideSkillsDescription();" />
                 </label>
 
                 <!--When user selects Yes-->
@@ -151,15 +155,82 @@
                 <div id="tags">
                     <label for="filter-tags">Filters / Tags</label>
                     <br>
-                    <input type="text" id="tags-input" name="tags-input" value="" required="required" placeholder="" />
+                    <input type="text" id="filter-tags" name="filter-tags" value="" required="required" placeholder="" />
                 </div>
 
                 <!-- Submit button -->
                 <input type="submit" />
-
-
             </form>
 
+            <!-- Writing stuff to the database -->
+            <script>
+                document.getElementById('post-creation-form').addEventListener('submit', submitForm);
+
+                function submitForm(e) {
+                    e.preventDefault();
+                    var title = document.getElementById("title").value;
+                    //console.log(title);
+                    var dateOneTime = document.getElementById("date").value;
+                    var dateContinuous = document.getElementById("daterange").value
+  
+                    // checking which version of date to put
+                    // if continuous date is picked
+                    if (dateOneTime === null) {
+                        var dates = document.getElementById("daterange").value;
+                    }
+                    else {
+                        var dates = document.getElementById("date").value;
+                    }
+                    //console.log(dates);
+
+                    var location = document.getElementById("location").value;
+                    var description = document.getElementById("description").value;
+                    //console.log(location);
+                    //console.log(description);
+                    
+                    // Checking if user requires skilled volunteers
+                    // if yes, add skill description to post
+                    var skilledChoiceNo = document.getElementById("skilled-no").value;
+                    if (skilledChoiceNo == null) {
+                        var skillDescription = document.getElementById("daterange").value;
+                        console.log(skillDescription);
+                    }
+                    var filterTags = document.getElementById("filter-tags").value;
+
+                    // Putting all the data into firebase
+                    var firebase = app_firebase;
+                    firebase.auth().onAuthStateChanged(function(user){
+                        console.log(title);
+                        console.log(dates);
+                        console.log(location);
+                        console.log(description);
+                        console.log(skillDescription);
+
+                        var dbActivePosts = firebase.database().ref('activePosts');
+                        var lastPostId;
+                        dbActivePosts.once('value', function(snapshot) {
+                            snapshot.forEach(function(currentPostId) {
+                                lastPostId = currentPostId;
+                                console.log(currentPostId);
+                            });
+                        });
+
+                        // creating a new Post ID
+                        var newPostId = (parseInt(lastPostId, 10) + 1).toString();
+                        firebase.database().ref('activePosts').update( {
+                            newPostId : {
+                                "title": title,
+                                "dates": dates,
+                                "location": location,
+                                "description": description,
+                                "skill-desctiption": skillDescription
+                            }
+                        });
+                    });
+                    window.alert("Your post has been successfully created!");
+                    window.location.href = "landing.html";                 
+                }
+            </script>
         </article>
 
     </div>
