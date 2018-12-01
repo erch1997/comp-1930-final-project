@@ -10,6 +10,13 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
     <script src="../js/create-postings.js"></script>
 
+
+    <!-- Links for the Date Picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 </head>
 
 <body>
@@ -60,52 +67,78 @@
 
         <!-- CONTENT -->
         <article class="content">
-            <form action="" method="post">
+            <form id="post-creation-form" action="" method="post">
 
                 <label for="title">Title </label>
                 <br>
                 <input type="text" id="title" name="title" value="" required="required" placeholder="" />
 
+                <!-- Event Duration Buttons -->
                 <br>
                 <label>Choose event duration</label>
                 <br>
-
-                <label>One time <input type="radio" name="date-duration" id="one-time" value="onetime" onclick="showDateSelection();" /> </label>
+                <label>One time <input type="radio" name="date-duration" id="one-time" value="onetime" onclick="showDateSelection();" />
+                </label>
+                <label>Continuous <input type="radio" name="date-duration" id="continuous" value="continuous" onclick="showContinuousSelection();" />
+                </label>
 
                 <!-- When One time is selected -->
                 <div class="hidden-unless-selected" id="one-time-div">
-                    <label for="date">Date <input type="text" id="one-date" name="date" class="require-if-active"
-                            placeholder="" /><label>
-                </div>
+                    Pick a date
+                    <br>
 
-                <label>Continuous <input type="radio" name="date-duration" id="continuous" value="continuous" onclick="showContinuousSelection();"/>
-                </label>
+                    <!-- Single Date Picker -->
+                    <input type="text" name="date" value="11/24/1984" />
+
+                    <script>
+                        $(function () {
+                            $('input[name="date"]').daterangepicker({
+                                singleDatePicker: true,
+                                showDropdowns: true,
+                                minYear: 1901,
+                                maxYear: parseInt(moment().format('YYYY'), 10)
+                            }, function (start, end, label) {
+                                console.log("A new date selection was made: " + start.format('YYYY-MM-DD'));
+                            });
+                        });
+                    </script>
+                </div>
 
                 <!-- When "Continuous" is selected -->
                 <div class="hidden-unless-selected" id="continuous-div">
                     Pick a date range
                     <br>
-                    <label for="start-date">Start date <input type="text" id="start-date" name="date" class="require-if-active"
-                            placeholder="" /><label>
-                            <label for="end-date">End date <input type="text" id="end-date" name="date" class="require-if-active"
-                                    placeholder="" /><label>
+                    <input type="text" name="daterange" value="01/01/2018 - 11/24/2018" />
+
+                    <!-- Date range picker -->
+                    <script>
+                        $(function () {
+                            $('input[name="daterange"]').daterangepicker({
+                                opens: 'left'
+                            }, function (start, end, label) {
+                                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                            });
+                        });
+                    </script>
                 </div>
 
                 <!--Location and Description fields-->
                 <br>
-                <label for="location">Location </label>
-                <br>
+                <label for="location">Location </label> <br>
                 <input type="text" id="location" name="location" value="" required="required" placeholder="" />
 
-                <br>
-                <label for="description">Description </label>
-                <br>
-                <input type="text" id="description" name="description" value="" required="required" placeholder="" />
 
                 <br>
-                <label>Is this a skilled position? </label>
+                <label for="description">Description </label><br>
+                <input type="text" id="description" name="description" value="" required="required" placeholder="" />
+
+                <!-- Skills Description fields -->
                 <br>
-                <label>Yes <input type="radio" name="skilled-choice" id="skilled-yes" value="skilledyes" onclick="showSkillsDescription();"/> </label>
+                <label>Is this a skilled position? </label> <br>
+                <label>Yes <input type="radio" name="skilled-choice" id="skilled-yes" value="skilledyes" onclick="showSkillsDescription();" />
+                </label>
+                <label>No <input type="radio" name="skilled-choice" id="skilled-no" value="skilled-no" onclick="hideSkillsDescription();" />
+                </label>
 
                 <!--When user selects Yes-->
                 <div class="hidden-unless-selected" id="skill-choice-yes">
@@ -114,28 +147,31 @@
                     <input type="text" id="skill-description" name="skill-description" value="" placeholder="" />
                 </div>
 
-                <label>No <input type="radio" name="skilled-choice" id="skilled-no" value="skilled-no" onclick="hideSkillsDescription();"/> </label>
-
+                <!--Filter tags field-->
                 <div id="tags">
                     <label for="filter-tags">Filters / Tags</label>
                     <br>
                     <input type="text" id="tags-input" name="tags-input" value="" required="required" placeholder="" />
                 </div>
 
+                <!-- Submit button -->
+                <input type="submit" />
+
+
             </form>
 
-         </article>
+        </article>
 
     </div>
-    
+
     <!-- JAVASCRIPT -->
     <script type="text/javascript">
-    document.getElementById("sign-out").onclick = function () {
+        document.getElementById("sign-out").onclick = function () {
             firebase.auth().signOut()
             location.href = "./index.html";
         };
     </script>
-    
+
 </body>
 
 </html>
