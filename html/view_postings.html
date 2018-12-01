@@ -75,11 +75,12 @@
   
   <!-- JAVASCRIPT -->
   <script type="text/javascript">
-  document.getElementById("sign-out").onclick = function () {
-          firebase.auth().signOut()
-          location.href = "./index.html";
-      };
+    document.getElementById("sign-out").onclick = function () {
+      firebase.auth().signOut()
+      location.href = "./index.html";
+    };
   </script>
+
   <!-- Shows active and inactive posts for user -->
   <script type="text/javascript">
     firebase.auth().onAuthStateChanged(function(user){
@@ -110,7 +111,7 @@
                     if (title.key == 'title') {
                       console.log(title.val());
                       var postDiv = $("<div class='posts'></div>");
-                      var postTitle = $("<a href=#>" 
+                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>" 
                         + title.val() + "</a>");
                       $(postDiv).append(postTitle);
                       $(activePosts).append(postDiv);
@@ -135,7 +136,7 @@
                     if (title.key == 'title') {
                       console.log(title.val());
                       var postDiv = $("<div class='posts'></div>");
-                      var postTitle = $("<a href=#>" 
+                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>" 
                         + title.val() + "</a>");
                       $(postDiv).append(postTitle);
                       $(inactivePosts).append(postDiv);
@@ -149,6 +150,16 @@
         })
       }
     });
+  </script>
+  <script type="text/javascript">
+    function setPreview(postId) {
+      firebase.auth().onAuthStateChanged(function(user){
+        var userPreview = firebase.database().ref('users/' + user.uid);
+        if (user) {
+          userPreview.update({preview : postId});
+        }
+      });
+    }
   </script>
 </body>
 </html>
