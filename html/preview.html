@@ -58,7 +58,7 @@
 
         <!-- CONTENT -->
         <article class="content">
-            Preview Page
+            <!--Post content shown here-->
         </article>
 
     </div>
@@ -69,6 +69,19 @@
             firebase.auth().signOut()
             location.href = "./index.html";
         };
+    </script>
+
+    <!--Gets the post id of post clicked from view_postings and shows post on page-->
+    <script>
+        firebase.auth().onAuthStateChanged(function(user){
+            var userPosts = firebase.database().ref('users/' + user.uid).child('email');
+            
+            userPosts.once('value', function(snap) {
+                var name = snap.val();
+                console.log(name);
+                $('.content').append(name);
+            })
+        });
     </script>
     
 </body>

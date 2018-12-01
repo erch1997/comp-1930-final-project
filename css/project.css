@@ -258,7 +258,22 @@ a:visited{
 ----- VIEW POSTINGS PAGE STYLINGS -----
 */
 .posts {
-  background-color: red;
+  background-color: white;
+  font-size: 12pt;
+  border: 1px solid #dadbdf;
   margin: 1em;
   padding: 1em;
+}
+
+.posts:hover {
+  box-shadow: 0px 0px 2px 2px #b3b3b3;
+}
+
+.post-container {
+  margin: 1em;
+  height: 35%;
+  padding: 1em;
+  font-size: 20pt;
+  background-color: white;
+  overflow-y: scroll;
 }
