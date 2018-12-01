@@ -21,12 +21,14 @@
                 <a href="./index.html"> VolunteerGo</a>
             </h1>
             <button id="sign-in" class="account">SIGN IN</button>
+            <button id="sign-out" class="account">SIGN OUT</button>
         </header>
 
         <!-- NAVBAR -->
         <nav class="navbar">
             <ul>
                 <li id="active"><a href="./index.html">Home</a></li>
+                <li><a href="./landing.html"  id="dashboard">Dashboard</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Volunteers</a></li>
                 <li><a href="#">Contact</a></li>
@@ -48,6 +50,24 @@
         document.getElementById("sign-in").onclick = function () {
             location.href = "./login.html";
         };
+    </script>
+    
+    <script type="text/javascript">
+        document.getElementById("sign-out").onclick = function () {
+          firebase.auth().signOut()
+          location.href = "./index.html";
+        };
+    </script>
+    
+    <script type="text/javascript">
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById("sign-in").style.display = "none";
+            } else {
+                document.getElementById("sign-out").style.display = "none";
+                document.getElementById("dashboard").href = "./login.html";
+            }
+        });
     </script>
     
 </body>
