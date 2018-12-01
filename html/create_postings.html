@@ -192,8 +192,8 @@
                     // Checking if user requires skilled volunteers
                     // if yes, add skill description to post
                     var skilledChoiceNo = document.getElementById("skilled-no").value;
-                    if (skilledChoiceNo == null) {
-                        var skillDescription = document.getElementById("daterange").value;
+                    if (skilledChoiceNo != null) {
+                        var skillDescription = document.getElementById("skill-description").value;
                         console.log(skillDescription);
                     }
                     var filterTags = document.getElementById("filter-tags").value;
@@ -209,24 +209,36 @@
 
                         var dbActivePosts = firebase.database().ref('activePosts');
                         var lastPostId;
-                        dbActivePosts.once('value', function(snapshot) {
+                        /*dbActivePosts.once('value', function(snapshot) {
                             snapshot.forEach(function(currentPostId) {
-                                lastPostId = currentPostId;
+                                lastPostId = currentPostId.key;
                                 console.log(currentPostId);
                             });
-                        });
+                        });*/
 
                         // creating a new Post ID
                         var newPostId = (parseInt(lastPostId, 10) + 1).toString();
-                        firebase.database().ref('activePosts').update( {
-                            newPostId : {
-                                "title": title,
-                                "dates": dates,
-                                "location": location,
-                                "description": description,
-                                "skill-desctiption": skillDescription
-                            }
-                        });
+                        console.log("New Post ID: " + lastPostId);
+                        if (skilledChoiceNo == null) {
+                            firebase.database().ref('activePosts').update( {
+                                newPostId : {
+                                    "title": title,
+                                    "dates": dates,
+                                    "location": location,
+                                    "description": description
+                                }
+                            });
+                        } else {
+                            firebase.database().ref('activePosts').update( {
+                                newPostId : {
+                                    "title": title,
+                                    "dates": dates,
+                                    "location": location,
+                                    "description": description,
+                                    "requirements" : skillDescription
+                                }
+                            });
+                        }
                     });
                     window.alert("Your post has been successfully created!");
                     window.location.href = "landing.html";                 
