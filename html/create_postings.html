@@ -208,20 +208,13 @@
                         console.log(skillDescription);
 
                         var dbActivePosts = firebase.database().ref('activePosts');
-                        var lastPostId;
-                        /*dbActivePosts.once('value', function(snapshot) {
-                            snapshot.forEach(function(currentPostId) {
-                                lastPostId = currentPostId.key;
-                                console.log(currentPostId);
-                            });
-                        });*/
+                        var newPostId = firebase.database().ref().child('activePosts').push().key;
 
-                        // creating a new Post ID
-                        var newPostId = (parseInt(lastPostId, 10) + 1).toString();
-                        console.log("New Post ID: " + lastPostId);
+                        console.log(newPostId);
+                        // console.log("New Post ID: " + lastPostId);
                         if (skilledChoiceNo == null) {
                             firebase.database().ref('activePosts').update( {
-                                newPostId : {
+                                [newPostId] : {
                                     "title": title,
                                     "dates": dates,
                                     "location": location,
@@ -230,7 +223,7 @@
                             });
                         } else {
                             firebase.database().ref('activePosts').update( {
-                                newPostId : {
+                                [newPostId] : {
                                     "title": title,
                                     "dates": dates,
                                     "location": location,
@@ -239,9 +232,12 @@
                                 }
                             });
                         }
+
+                        firebase.database().ref('users/' + user.uid + '/activePosts').update({[newPostId] : 0});
+
                     });
                     window.alert("Your post has been successfully created!");
-                    window.location.href = "landing.html";                 
+                    window.location.href = "landing.html";           
                 }
             </script>
         </article>
