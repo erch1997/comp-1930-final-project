@@ -105,9 +105,9 @@
           snapshot.forEach(function(postId) {
             userPosts.once('value', function(snap) {
               snap.forEach(function(userPostId) {
-                var id = userPostId.val();
+                var id = userPostId.key;
                 if (id == postId.key) {
-                  console.log(userPostId.val() + " matches " + postId.key);
+                  console.log(userPostId.key + " matches " + postId.key);
                   postId.forEach(function(title) {
                     if (title.key == 'title') {
                       console.log(title.val());
