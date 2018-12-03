@@ -166,53 +166,60 @@
 
             <!-- Writing stuff to the database -->
             <script>
-
                 var root = firebase.database().ref().child('activePosts');
+                var push = root.push();
+
                 $('#createButton').click(function(){
-                    var myTitle = $('#title').val();
-
-                    // DATES
-                    var dateOneTime = $("#date").val();
-                    var dateContinuous = $('#daterange').val();
-                    if (dateOneTime === null) {
-                        var myDates = $('#daterange').val();    
-                    } else {
-                        var myDates = $('#date').val();
-                    }
-
-                    var myLocation = $('#location').val();
-                    var myDescription = $('#description').val();
-
-                    // SKILLS
-                    var skilledChoiceNo = $('#skilled-no').val();
-                    if (skilledChoiceNo != null) {
-                        var mySkills = $('#skill-description').val();
-                    }
-                
-                    var myTags = $('#filter-tags').val();
-
-                    if (skilledChoiceNo == null) {
-                        root.push().set({
-                        title: myTitle,
-                        dates: myDates,
-                        location: myLocation,
-                        description: myDescription,
-                        tags: myTags
-                        })    
-                    } else {
-                        root.push().set({
-                        title: myTitle,
-                        dates: myDates,
-                        location: myLocation,
-                        description: myDescription,
-                        skills: mySkills,
-                        tags: myTags
-                        })
-                    }
                     
-                window.alert("Your post has been successfully created!");
-                window.location.href = "landing.html";
+                    firebase.auth().onAuthStateChanged(function(user) {
+                        if (user) {
+                            var myTitle = $('#title').val();
+                            // DATES
+                            var dateOneTime = $("#date").val();
+                            var dateContinuous = $('#daterange').val();
+                            if (dateOneTime === null) {
+                                var myDates = $('#daterange').val();    
+                            } else {
+                                var myDates = $('#date').val();
+                            }
+                            var myLocation = $('#location').val();
+                            var myDescription = $('#description').val();
+                            // SKILLS
+                            var skilledChoiceNo = $('#skilled-no').val();
+                            if (skilledChoiceNo != null) {
+                                var mySkills = $('#skill-description').val();
+                            }
+                        
+                            var myTags = $('#filter-tags').val();
+                            if (skilledChoiceNo == null) {
+                                push.set({
+                                title: myTitle,
+                                dates: myDates,
+                                location: myLocation,
+                                description: myDescription,
+                                tags: myTags
+                                })    
+                            } else {
+                                push.set({
+                                title: myTitle,
+                                dates: myDates,
+                                location: myLocation,
+                                description: myDescription,
+                                skills: mySkills,
+                                tags: myTags
+                                })
+                            }
+                            var postId = push.key;
+                            console.log(postId);
+                            var userPost = firebase.database().ref('users/' + user.uid).child('activePosts');
+                            userPost.update({[postId] : "0"});
+                            console.log(userPost);
+                        }
+                    });
+                    window.alert("Your post has been successfully created!");
+                    window.location.replace("landing.html");
                 });
+            
             </script>
         </article>
 
