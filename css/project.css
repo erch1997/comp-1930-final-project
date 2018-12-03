@@ -288,3 +288,12 @@ a:visited{
   background-color: white;
   overflow-y: scroll;
 }
+
+/*
+----- PREVIEW PAGE -----
+*/
+.edit {
+  border: 1px solid black;
+  padding: 1vw;
+  background-color: white;
+}
