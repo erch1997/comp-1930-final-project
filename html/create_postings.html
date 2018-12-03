@@ -177,7 +177,7 @@
                             // DATES
                             var dateOneTime = $("#date").val();
                             var dateContinuous = $('#daterange').val();
-                            if (dateOneTime === null) {
+                            if (dateOneTime == "") {
                                 var myDates = $('#daterange').val();    
                             } else {
                                 var myDates = $('#date').val();
@@ -186,39 +186,46 @@
                             var myDescription = $('#description').val();
                             // SKILLS
                             var skilledChoiceNo = $('#skilled-no').val();
-                            if (skilledChoiceNo != null) {
+                            if (skilledChoiceNo != "") {
                                 var mySkills = $('#skill-description').val();
                             }
                         
                             var myTags = $('#filter-tags').val();
-                            if (skilledChoiceNo == null) {
-                                push.set({
-                                title: myTitle,
-                                dates: myDates,
-                                location: myLocation,
-                                description: myDescription,
-                                tags: myTags
-                                })    
-                            } else {
-                                push.set({
-                                title: myTitle,
-                                dates: myDates,
-                                location: myLocation,
-                                description: myDescription,
-                                skills: mySkills,
-                                tags: myTags
-                                })
-                            }
+                            
+                            // Validate Required Fields
+                            if (myTitle != "" && myDates != "" && myLocation != "" && myDescription != "" && myTags != ""){
+
+                                if (skilledChoiceNo == null) {
+                                    push.set({
+                                    title: myTitle,
+                                    dates: myDates,
+                                    location: myLocation,
+                                    description: myDescription,
+                                    tags: myTags
+                                    })
+                                } else {
+                                    push.set({
+                                    title: myTitle,
+                                    dates: myDates,
+                                    location: myLocation,
+                                    description: myDescription,
+                                    skills: mySkills,
+                                    tags: myTags
+                                    })
+                                }
                             var postId = push.key;
                             console.log(postId);
                             var userPost = firebase.database().ref('users/' + user.uid).child('activePosts');
                             userPost.update({[postId] : "0"});
                             console.log(userPost);
+                            
+                            window.alert("Your post has been successfully created!");
+                            window.location.href = "landing.html";
+                        } else {
+                            window.alert("Please fill out all required fields!");
                         }
-                    });
-                    window.alert("Your post has been successfully created!");
-                    window.location.replace("landing.html");
-                  
+                    }});
+                    
                 });
             
             </script>

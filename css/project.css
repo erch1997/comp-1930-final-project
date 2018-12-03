@@ -50,7 +50,7 @@ body {
   background-color: lightgrey;
   padding: 1em;
   /** CHANGE FONT OF CONTENT HERE **/
-  font-family: "mitr", Gadget, sans-serif;
+  font-family: "roboto", Gadget, sans-serif;
 }
 
 
@@ -119,7 +119,17 @@ form.home-search button:hover {
 
 .navbar #search-container {
   float: right;
-  padding: 0.88em;
+  padding: 0.5em;
+}
+
+#search-container input[type=text] {
+  padding: 0.5em;
+  margin-top: 0em;
+}
+
+#search-container button {
+  background-color: #f9f9f9;
+  border: none;
 }
 
 .navbar #active {
@@ -142,7 +152,7 @@ form.home-search button:hover {
 .navbar li a {
   display: block;
   text-align: center;
-  padding: 1em;
+  padding: 1em 1.25em 1em 1.25em;
 }
 
 
