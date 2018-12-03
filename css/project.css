@@ -6,6 +6,7 @@
 */
 @import url('https://fonts.googleapis.com/css?family=Mitr:500');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Nunito:800');
 
 
 /*
@@ -161,8 +162,8 @@ form.home-search button:hover {
 */
 .header #name {
     margin: auto;
-    font-family: "mitr", Gadget, sans-serif;
-    font-size: 40pt;
+    font-family: "Nunito", Gadget, sans-serif;
+    font-size: 50pt;
 }
 
 .header #logo {
