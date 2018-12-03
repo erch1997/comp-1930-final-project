@@ -73,7 +73,7 @@
                 <div id="descript-div" contenteditable="true"></div>
             </section>
             <section id="req-container">
-                <h1 id="post-req">Requirements</h1>
+                <h1 id="post-req">Skill Requirements</h1>
                 <div id="req-div" contenteditable="true">Add Requirements</div>
             </section>
             <section id="tags-container">
@@ -104,7 +104,7 @@
             var title = document.getElementById('post-title');
             var postDates = document.getElementById('dates-div');
             var description = document.getElementById('descript-div');
-            var requirements = document.getElementById('req-div');
+            var skills = document.getElementById('req-div');
             var location = document.getElementById('location-div');
             var tags = document.getElementById('tags-div');
             firebase.auth().onAuthStateChanged(function(user) {
@@ -118,7 +118,7 @@
                             "dates": postDates.innerHTML,
                             "location": location.innerHTML,
                             "description": description.innerHTML,
-                            "requirements" : requirements.innerHTML,
+                            "skills" : skills.innerHTML,
                             "tags" : tags.innerHTML
 
                         });
@@ -144,7 +144,7 @@
                                 var title = $('#post-title');
                                 var postDates = $('#dates-div');
                                 var description = $('#descript-div');
-                                var requirements = $('#req-div');
+                                var skills = $('#req-div');
                                 var location = $('#location-div');
                                 var tags = $('#tags-div');
                                 if (postId.key == prev.val()) {
@@ -160,9 +160,9 @@
                                         case 'description':
                                             description.append(value);
                                             break;
-                                        case 'requirements':
+                                        case 'skills':
                                             if (value != "" || value != null) {
-                                                requirements.html(value);
+                                                skills.html(value);
                                             }
                                             break;
                                         case 'location':
@@ -203,9 +203,9 @@
                                         case 'description':
                                             description.append(value);
                                             break;
-                                        case 'requirements':
+                                        case 'skills':
                                             if (value != "" || value != null) {
-                                                requirements.html(value);
+                                                skills.html(value);
                                             }
                                             break;
                                         case 'tags':
