@@ -6,7 +6,7 @@
 */
 @import url('https://fonts.googleapis.com/css?family=Mitr:500');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import url('https://fonts.googleapis.com/css?family=Nunito:800');
+@import url('https://fonts.googleapis.com/css?family=Sanchez');
 
 
 /*
@@ -162,7 +162,7 @@ form.home-search button:hover {
 */
 .header #name {
     margin: auto;
-    font-family: "Nunito", Gadget, sans-serif;
+    font-family: "Sanchez", Gadget, sans-serif;
     font-size: 50pt;
 }
 
@@ -189,7 +189,7 @@ a:visited{
   position: relative;
   margin-right: 5%;
   background-color: #F5C401;
-  box-shadow: 5px 10px 25px #888888;  
+  box-shadow: 2px 5px 25px #888888;  
   border: none;
   color: white;
   font-family: 'roboto';
