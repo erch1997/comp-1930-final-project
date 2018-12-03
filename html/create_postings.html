@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
     <script src="../js/create-postings.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
     <!-- Links for the Date Picker -->
@@ -47,14 +48,14 @@
                 <li><a href="#">Contact</a></li>
             </ul>
             <div id="search-container">
-                <form action="">
+                <form>
                     <input type="text" placeholder="Search.." name="search">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
         </nav>
 
-        <!-- SIDE BAR --->
+        <!-- SIDE BAR -->
         <aside class="sidebar">
             <ul id="postings-nav"><span id="sidenav-headings">Postings</span>
                 <li><a href="./create_postings.html">Create</a></li>
@@ -73,7 +74,7 @@
 
         <!-- CONTENT -->
         <article class="content">
-            <form id="post-creation-form" action="" method="post">
+            <form id="post-creation-form" method="post">
 
                 <label for="title">Title </label>
                 <br>
@@ -160,88 +161,54 @@
                 </div>
 
                 <!-- Submit button -->
-                <input type="submit" />
+                <input type="submit"  id="createButton"/>
             </form>
 
             <!-- Writing stuff to the database -->
             <script>
-                document.getElementById('post-creation-form').addEventListener('submit', submitForm);
-
-                function submitForm(e) {
-                    e.preventDefault();
-                    var title = document.getElementById("title").value;
-                    //console.log(title);
-                    var dateOneTime = document.getElementById("date").value;
-                    var dateContinuous = document.getElementById("daterange").value
-  
-                    // checking which version of date to put
-                    // if continuous date is picked
+                var root = firebase.database().ref().child('activePosts');
+                $('#createButton').click(function(){
+                    var myTitle = $('#title').val();
+                    // DATES
+                    var dateOneTime = $("#date").val();
+                    var dateContinuous = $('#daterange').val();
                     if (dateOneTime === null) {
-                        var dates = document.getElementById("daterange").value;
+                        var myDates = $('#daterange').val();    
+                    } else {
+                        var myDates = $('#date').val();
                     }
-                    else {
-                        var dates = document.getElementById("date").value;
-                    }
-                    //console.log(dates);
-
-                    var location = document.getElementById("location").value;
-                    var description = document.getElementById("description").value;
-                    //console.log(location);
-                    //console.log(description);
-                    
-                    // Checking if user requires skilled volunteers
-                    // if yes, add skill description to post
-                    var skilledChoiceNo = document.getElementById("skilled-no").value;
+                    var myLocation = $('#location').val();
+                    var myDescription = $('#description').val();
+                    // SKILLS
+                    var skilledChoiceNo = $('#skilled-no').val();
                     if (skilledChoiceNo != null) {
-                        var skillDescription = document.getElementById("skill-description").value;
-                        console.log(skillDescription);
+                        var mySkills = $('#skill-description').val();
                     }
-                    var filterTags = document.getElementById("filter-tags").value;
-
-                    // Putting all the data into firebase
-                    var firebase = app_firebase;
-                    firebase.auth().onAuthStateChanged(function(user){
-                        console.log(title);
-                        console.log(dates);
-                        console.log(location);
-                        console.log(description);
-                        console.log(skillDescription);
-
-                        var dbActivePosts = firebase.database().ref('activePosts');
-                        var newPostId = firebase.database().ref().child('activePosts').push().key;
-
-                        console.log(newPostId);
-                        // console.log("New Post ID: " + lastPostId);
-                        if (skilledChoiceNo == null) {
-                            firebase.database().ref('activePosts').update( {
-                                [newPostId] : {
-                                    "title": title,
-                                    "dates": dates,
-                                    "location": location,
-                                    "description": description,
-                                    "requirements": null,
-                                    "tags": filterTags
-                                }
-                            });
-                        } else {
-                            firebase.database().ref('activePosts').update( {
-                                [newPostId] : {
-                                    "title": title,
-                                    "dates": dates,
-                                    "location": location,
-                                    "description": description,
-                                    "requirements" : skillDescription,
-                                    "tags": filterTags
-                                }
-                            });
-                        }
-
-                        firebase.database().ref('users/' + user.uid + '/activePosts').update({[newPostId] : 0});
-
-                    });
-                    window.alert("Your post has been successfully created!");
-                    window.location.href = "landing.html";           
-                }
+                
+                    var myTags = $('#filter-tags').val();
+                    if (skilledChoiceNo == null) {
+                        root.push().set({
+                        title: myTitle,
+                        dates: myDates,
+                        location: myLocation,
+                        description: myDescription,
+                        tags: myTags
+                        })    
+                    } else {
+                        root.push().set({
+                        title: myTitle,
+                        dates: myDates,
+                        location: myLocation,
+                        description: myDescription,
+                        skills: mySkills,
+                        tags: myTags
+                        })
+                    }
+                    
+                window.alert("Your post has been successfully created!");
+                window.location.href = "landing.html";
+                });
+            
             </script>
         </article>
 
