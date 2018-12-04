@@ -4,10 +4,15 @@ Final Deliverable for COMP 1930 (CST Term 1)
 Project name: VolunteerGo
 
 Created by:
+
 BBY Team 12
+
 Eric Chiu
+
 Vicky Chung
+
 Mikhaela Layon
+
 Set C
 
 
