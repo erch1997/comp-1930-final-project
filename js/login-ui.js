@@ -1,4 +1,4 @@
-/* JAVASCRIPT FILE */
+// This file contains the sign-in authentication UI provided by Firebase.
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var uiConfig = {

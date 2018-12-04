@@ -1,13 +1,24 @@
+<!-- 
+    This page is created by:
+    BBY Team 12
+    Vicky Chung
+    Eric Chiu
+    Mikhaela Layon
+    Set C  
+-->
 <!DOCTYPE html>
 <html>
 
 <head>
   <title>View Postings</title>
   <meta charset="utf-8"/>
-  <link rel="stylesheet" type="text/css" href="../css/project.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+   <!-- Java script files -->
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../css/project.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -47,10 +58,12 @@
         <li><a href="./view_postings.html">View Posts</a></li>
         <li><a href="#">Drafts</a></li>
       </ul>
+
       <ul id="mail-nav"><span id="sidenav-headings">Mail</span>
         <li><a href="#">Inbox</a></li>
         <li><a href="#">Create</a></li>
       </ul>
+
       <ul id="settings-nav"><span id="sidenav-headings">Settings</span>
         <li><a href="#">Account</a></li>
         <li><a href="#">Privacy</a></li>
@@ -89,6 +102,9 @@
       var inactivePosts = document.getElementById('inactive-posts');
       var dbActivePosts = firebase.database().ref('activePosts');
       var dbInactivePosts = firebase.database().ref('inactivePosts');
+
+      // checking if user is still logged in before getting
+      // the active and inactive posts
       if (user) {
         var userPosts = firebase.database().ref('users/' + user.uid).child('activePosts');
         var userInactive = firebase.database().ref('users/'+user.uid).child('inactivePosts');
@@ -106,9 +122,15 @@
             userPosts.once('value', function(snap) {
               snap.forEach(function(userPostId) {
                 var id = userPostId.key;
+                
+                // Going through the database and checking which
+                // posts are made by the user themselves
                 if (id == postId.key) {
                   console.log(userPostId.key + " matches " + postId.key);
                   postId.forEach(function(title) {
+
+                    // Generating the titles of the postings made by the
+                    // user and appending it to the div
                     if (title.key == 'title') {
                       console.log(title.val());
                       var postDiv = $("<div class='posts'></div>");
@@ -131,9 +153,15 @@
             userInactive.once('value', function(snap) {
               snap.forEach(function(userPostId) {
                 var id = userPostId.val();
+
+                // Going through the database and checking which
+                // posts are made by the user themselves
                 if (id == postId.key) {
                   console.log(userPostId.val() + " matches " + postId.key);
                   postId.forEach(function(title) {
+
+                     // Generating the titles of the postings made by the
+                    // user and appending it to the div
                     if (title.key == 'title') {
                       console.log(title.val());
                       var postDiv = $("<div class='posts'></div>");
@@ -152,6 +180,12 @@
       }
     });
   </script>
+
+  <!-- 
+    Checks if the user is logged in.
+    If the user is logged in, it sets the value of preview child node
+    to the specific post's post ID selected by the user.
+  -->
   <script type="text/javascript">
     function setPreview(postId) {
       firebase.auth().onAuthStateChanged(function(user){
