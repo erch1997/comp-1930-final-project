@@ -1,0 +1,133 @@
+<!-- 
+    This page is created by:
+    BBY Team 12
+    Vicky Chung
+    Eric Chiu
+    Mikhaela Layon
+    Set C 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Landing</title>
+  <meta charset="utf-8"/>
+
+  <!-- Java script files -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+  <!-- CSS stylesheets -->
+  <link rel="stylesheet" type="text/css" href="./css/project.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+  <script src="./js/load-firebase.js"></script>
+    <div class="grid">
+
+        <!-- HEADER -->
+        <header class="header">
+            <img src="./img/logo.png" id="logo" />
+            <h1 id="name">
+                <a href="./index.html">VolunteerGo</a>
+            </h1>
+            <button id="sign-out" class="account">SIGN OUT</button>
+        </header>
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li id="active"><a href="./landing.html"  id="dashboard">Dashboard</a></li>
+                <li><a href="#">Volunteers</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div id="search-container">
+                <form action="">
+                    <input id="searchbar" type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </nav>
+
+        <!-- SIDE BAR --->
+        <aside class="sidebar">
+            <ul id="postings-nav"><span id="sidenav-headings">Postings</span>
+                <li><a href="./create_postings.html">Create</a></li>
+                <li><a href="./view_postings.html">View Posts</a></li>
+                <li><a href="#">Drafts</a></li>
+            </ul>
+            <ul id="mail-nav"><span id="sidenav-headings">Mail</span>
+                <li><a href="#">Inbox</a></li>
+                <li><a href="#">Create</a></li>
+            </ul>
+            <ul id="settings-nav"><span id="sidenav-headings">Settings</span>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Privacy</a></li>
+            </ul>
+        </aside>
+
+        <!-- CONTENT -->
+        <article class="content" id="landing">
+            <div id="greeting">Hello <span id="userName"></span>, what would you like to do today?
+            
+            </div>
+            <img id="stitch" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif"/>
+            <!-- ADD USER'S NAME-->
+        </article>
+
+    </div>
+    
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript">
+      document.getElementById("sign-out").onclick = function () {
+        firebase.auth().signOut()
+        location.href = "./index.html";
+      };
+    </script>
+    
+    <!--Adds authenticated user to database--> 
+    <script src="./js/add-user.js"></script>
+
+
+    <!--
+        Takes in the user's first name and displays it
+        on the page.
+    -->
+    <script>
+      firebase.auth().onAuthStateChanged(function(user) {
+
+        if (user) {
+          var output = document.getElementById('userName');
+          var dbRef = firebase.database().ref("users/"+user.uid).child("name");
+          output.innerText = "";
+
+          /**
+           * Going through user information and grabbing
+           * the user's first name. 
+           */
+          dbRef.once('value', function(snapshot) {
+            var childData = snapshot.val();
+            var count = 0;
+            for (var i = 0; i < childData.length; i++) {
+              if (childData.charAt(i) != " ") {
+                count++;
+              } else {
+                i = childData.length;
+              }
+            }
+
+            var first = childData.charAt(0).toUpperCase() + childData.substring(1, count);
+            //console.log(first);
+            output.innerText += (first);
+
+          }); 
+        }
+      });
+    
+    </script>
+</body>
+</html>
