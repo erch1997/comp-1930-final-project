@@ -1,13 +1,25 @@
+<!-- 
+    This page is created by:
+    BBY Team 12
+    Vicky Chung
+    Eric Chiu
+    Mikhaela Layon
+    Set C  
+-->
 <!DOCTYPE html>
 <html>
 
 <head>
   <title>Preview</title>
   <meta charset="utf-8"/>
-  <link rel="stylesheet" type="text/css" href="../css/project.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Java script files -->
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="../css/project.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -86,7 +98,7 @@
 
     </div>
     
-    <!-- JAVASCRIPT -->
+    <!-- Makes the post editable by adding the edit class and removing it. -->
     <script type="text/javascript">
         document.getElementById("sign-out").onclick = function () {
             firebase.auth().signOut()
@@ -101,17 +113,22 @@
     <!-- Updates database with changes to post -->
     <script type="text/javascript">
         document.getElementById("submit").onclick = function () {
+
             var title = document.getElementById('post-title');
             var postDates = document.getElementById('dates-div');
             var description = document.getElementById('descript-div');
             var skills = document.getElementById('req-div');
             var location = document.getElementById('location-div');
             var tags = document.getElementById('tags-div');
+
             firebase.auth().onAuthStateChanged(function(user) {
                 var post = firebase.database().ref('users/' + user.uid).child('preview');
                 post.once('value', function(snapshot) {
                     var previewId = snapshot.val();
                     console.log(previewId);
+
+                    // Sets the entered values as new values to the corresponding
+                    // nodes in the database.
                     firebase.database().ref('activePosts').child(previewId).set(
                         {
                             "title": title.innerHTML,
@@ -137,6 +154,8 @@
                 var userInactive = firebase.database().ref('users/'+user.uid).child('inactivePosts');
                 var dbActivePosts = firebase.database().ref('activePosts');
                 var dbInactivePosts = firebase.database().ref('inactivePosts'); 
+
+                // Going through Active Posts
                 dbActivePosts.once('value', function(snapshot) {
                     snapshot.forEach(function(postId) {
                         postId.forEach(function(postInfo) {
@@ -147,6 +166,9 @@
                                 var skills = $('#req-div');
                                 var location = $('#location-div');
                                 var tags = $('#tags-div');
+
+                                // Goes through each node and takes each node's value
+                                // Then each value gets appended to the corresponding div
                                 if (postId.key == prev.val()) {
                                     let pInfo = postInfo.key;
                                     let value = postInfo.val();
@@ -181,6 +203,8 @@
                         });  
                     });
                 });
+
+                // Going through Inactive Posts
                 dbInactivePosts.once('value', function(snapshot) {
                     snapshot.forEach(function(postId) {
                         postId.forEach(function(postInfo) {
@@ -190,6 +214,9 @@
                                 var description = $('#descript-container');
                                 var requirements = $('#req-container');
                                 var tags = $('#tags-div');
+
+                                // Goes through each node and takes each node's value
+                                // Then each value gets appended to the corresponding div
                                 if (postId.key == prev.val()) {
                                     let pInfo = postInfo.key;
                                     let value = postInfo.val();
