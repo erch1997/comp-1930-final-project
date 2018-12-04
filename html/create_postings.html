@@ -1,22 +1,26 @@
+<!-- 
+    This page is created by:
+    BBY Team 12
+    Vicky Chung
+    Eric Chiu
+    Mikhaela Layon
+    Set C  
+-->
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Create Postings</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="../css/project.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+     <!-- Java script files -->
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
     <script src="../js/create-postings.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-
-    <!-- Links for the Date Picker -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="../css/project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Links for Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>    
@@ -84,40 +88,30 @@
                 <br>
                 <label>Choose event duration</label>
                 <br>
-                <label>One time <input type="radio" name="date-duration" id="one-time" value="onetime" onclick="showDateSelection();" />
-                </label>
-                <label>Continuous <input type="radio" name="date-duration" id="continuous" value="continuous" onclick="showContinuousSelection();" />
-                </label>
+                <label>One time <input type="radio" name="date-duration" id="one-time" value="onetime" onclick="showDateSelection();"></label>
+                <label>Continuous <input type="radio" name="date-duration" id="continuous" value="continuous" onclick="showContinuousSelection();"></label>
 
                 <!-- When One time is selected -->
                 <div class="hidden-unless-selected" id="one-time-div">
                     Pick a date
                     <br>
-
                     <!-- Single Date Picker -->
                     <input type="date" name="date" id="date">
-                    
-                    
-
                 </div>
 
                 <!-- When "Continuous" is selected -->
                 <div class="hidden-unless-selected" id="continuous-div">
                     Pick a date range
                     <br>
-
                     <!-- Date range picker -->
                     <input type="date" name="daterange" id="daterangefrom">
                     <input type="date" name="daterange" id="daterangeto">
-
                 </div>
 
                 <!--Location and Description fields-->
                 <br>
                 <label for="location">Location </label> <br>
                 <input type="text" id="location" name="location" value="" required/>
-
-
                 <br>
                 <label for="description">Description </label><br>
                 <input type="text" id="description" name="description" value="" required/>
@@ -125,10 +119,8 @@
                 <!-- Skills Description fields -->
                 <br>
                 <label>Is this a skilled position? </label> <br>
-                <label>Yes <input type="radio" name="skilled-choice" id="skilled-yes" value="yes" onclick="showSkillsDescription();" />
-                </label>
-                <label>No <input type="radio" name="skilled-choice" id="skilled-no" value="no" onclick="hideSkillsDescription();" />
-                </label>
+                <label>Yes <input type="radio" name="skilled-choice" id="skilled-yes" value="yes" onclick="showSkillsDescription();" /></label>
+                <label>No <input type="radio" name="skilled-choice" id="skilled-no" value="no" onclick="hideSkillsDescription();" /></label>
 
                 <!--When user selects Yes-->
                 <div class="hidden-unless-selected" id="skill-choice-yes">
@@ -158,13 +150,14 @@
                     firebase.auth().onAuthStateChanged(function(user) {
                         if (user) {
                             var myTitle = $('#title').val();
+
                             // DATES
                             var dateOneTime = $("#date").val();
-                            
                             var dateFrom = $('#daterangefrom').val();
                             var dateTo = $('#daterangeto').val();
                             var dateContinuous = 'From: ' + dateFrom + '<br>' + 'To: ' + dateTo;
                             
+                            // Value of dates depends on which date is selected.
                             if (dateOneTime == "") {
                                 var myDates = dateContinuous;
                             } else {
@@ -172,6 +165,7 @@
                             }
                             var myLocation = $('#location').val();
                             var myDescription = $('#description').val();
+                            s
                             // SKILLS
                             var skilledChoiceNo = $('#skilled-no').val();
                             if (skilledChoiceNo != "") {
@@ -180,7 +174,11 @@
                         
                             var myTags = $('#filter-tags').val();
                             
-                            // Validate Required Fields
+                            /**
+                             * Validate Required Fields
+                             * User has to fill out the fields below. If not, a pop-up message telling the user to fill out
+                             * the required fields will appear.
+                             */
                             if (myTitle != "" && myDates != "" && myLocation != "" && myDescription != "" && myTags != "" ) {
 
                                 if (skilledChoiceNo == null) {
@@ -201,27 +199,30 @@
                                     tags: myTags
                                     })
                                 }
-                            var postId = push.key;
-                            console.log(postId);
-                            var userPost = firebase.database().ref('users/' + user.uid).child('activePosts');
-                            userPost.update({[postId] : "0"});
-                            console.log(userPost);
+
+                                var postId = push.key;
+                                console.log(postId);
+
+                                // Adding the created post ID under the user's active posts.
+                                var userPost = firebase.database().ref('users/' + user.uid).child('activePosts');
+                                userPost.update({[postId] : "0"});
+                                console.log(userPost);
                             
-                            window.alert("Your post has been successfully created!");
-                            window.location.href = "landing.html";
-                        } else {
-                            window.alert("Please fill out all required fields!");
-                        }
-                    }});
+                                window.alert("Your post has been successfully created!");
+                                window.location.href = "landing.html";
+                            } else {
+                                window.alert("Please fill out all required fields!");
+                            }
+                        }});
                     
-                });
+                    });
             
             </script>
         </article>
 
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- sT -->
     <script type="text/javascript">
         document.getElementById("sign-out").onclick = function () {
             firebase.auth().signOut()
