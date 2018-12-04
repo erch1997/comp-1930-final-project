@@ -59,6 +59,7 @@
 
         <!-- CONTENT -->
         <article class="content">
+            <section id="post-preview">
             <h1 id="post-title" contenteditable="true">Title</h1>
             <section id="location-container">
                 <h1 id="post-location">Location</h1>
@@ -82,6 +83,7 @@
             </section>
             <br/>
             <button id="submit" type="submit">Save Changes</button>
+            </section>
         </article>
 
     </div>
@@ -93,7 +95,7 @@
             location.href = "./index.html";
         };
         $(".content div, #post-title").click( function() {
-            $(".content > * > *, #post-title").removeClass("edit");
+            $(".content > * > * > *, #post-title").removeClass("edit");
             $(this).addClass("edit");
         });
     </script>
