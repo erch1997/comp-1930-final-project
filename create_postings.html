@@ -1,0 +1,236 @@
+<!-- 
+    This page is created by:
+    BBY Team 12
+    Vicky Chung
+    Eric Chiu
+    Mikhaela Layon
+    Set C  
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Postings</title>
+    <meta charset="utf-8" />
+    
+     <!-- Java script files -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+    <script src="./js/create-postings.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="./css/project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Links for Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>    
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+</head>
+
+<body>
+    <script src="./js/load-firebase.js"></script>
+    <div class="grid">
+
+        <!-- HEADER -->
+        <header class="header">
+            <img src="./img/logo.png" id="logo" />
+            <h1 id="name">
+                <a href="./index.html"> VolunteerGo</a>
+            </h1>
+            <button id="sign-out" class="account">SIGN OUT</button>
+        </header>
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li id="active"><a href="./landing.html"  id="dashboard">Dashboard</a></li>
+                <li><a href="#">Volunteers</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div id="search-container">
+                <form>
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </nav>
+
+        <!-- SIDE BAR -->
+        <aside class="sidebar">
+            <ul id="postings-nav"><span id="sidenav-headings">Postings</span>
+                <li><a href="./create_postings.html">Create</a></li>
+                <li><a href="./view_postings.html">View Posts</a></li>
+                <li><a href="#">Drafts</a></li>
+            </ul>
+            <ul id="mail-nav"><span id="sidenav-headings">Mail</span>
+                <li><a href="#">Inbox</a></li>
+                <li><a href="#">Create</a></li>
+            </ul>
+            <ul id="settings-nav"><span id="sidenav-headings">Settings</span>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Privacy</a></li>
+            </ul>
+        </aside>
+
+        <!-- CONTENT -->
+        <article class="content">
+            <form id="post-creation-form" method="post">
+                <h1 class="page-title">Create New Post</h1><hr/>
+                <label for="title">Title* </label>
+                <br>
+                <input type="text" id="title" name="title" value="" required/>
+
+                <!-- Event Duration Buttons -->
+                <br>
+                <label>Choose event duration*</label>
+                <br>
+                <label>One time <input type="radio" name="date-duration" id="one-time" value="onetime" onclick="showDateSelection();"></label>
+                <label>Continuous <input type="radio" name="date-duration" id="continuous" value="continuous" onclick="showContinuousSelection();"></label>
+
+                <!-- When One time is selected -->
+                <div class="hidden-unless-selected" id="one-time-div">
+                    Pick a date
+                    <br>
+                    <!-- Single Date Picker -->
+                    <input type="date" name="date" id="date">
+                </div>
+
+                <!-- When "Continuous" is selected -->
+                <div class="hidden-unless-selected" id="continuous-div">
+                    Pick a date range
+                    <br>
+                    <!-- Date range picker -->
+                    <input type="date" name="daterange" id="daterangefrom">
+                    <input type="date" name="daterange" id="daterangeto">
+                </div>
+
+                <!--Location and Description fields-->
+                <br>
+                <label for="location">Location* </label> <br>
+                <input type="text" id="location" name="location" value="" required/>
+                <br>
+                <label for="description">Description* </label><br>
+                <textarea type="text" id="description" name="description" value="" required></textarea>
+
+                <!-- Skills Description fields -->
+                <br>
+                <label>Is this a skilled position? </label> <br>
+                <label>Yes <input type="radio" name="skilled-choice" id="skilled-yes" value="yes" onclick="showSkillsDescription();" /></label>
+                <label>No <input type="radio" name="skilled-choice" id="skilled-no" value="no" onclick="hideSkillsDescription();" /></label>
+
+                <!--When user selects Yes-->
+                <div class="hidden-unless-selected" id="skill-choice-yes">
+                    <label for="skill-description">Skills required </label>
+                    <br>
+                    <input type="text" id="skill-description" name="skill-description" value=""/>
+                </div>
+
+                <!--Filter tags field-->
+                <div id="tags">
+                    <label for="filter-tags">Filters / Tags*</label>
+                    <br>
+                    <input type="text" id="filter-tags" name="filter-tags" value="" required/>
+                </div>
+
+                <!-- Submit button -->
+                <input type="submit"  id="createButton"/>
+            </form>
+
+            <!-- Writing stuff to the database -->
+            <script>
+                var root = firebase.database().ref().child('activePosts');
+                var push = root.push();
+
+                $('#createButton').click(function(){
+                    
+                    firebase.auth().onAuthStateChanged(function(user) {
+                        if (user) {
+                            var myTitle = $('#title').val();
+
+                            // DATES
+                            var dateOneTime = $("#date").val();
+                            var dateFrom = $('#daterangefrom').val();
+                            var dateTo = $('#daterangeto').val();
+                            var dateContinuous = 'From: ' + dateFrom + '<br>' + 'To: ' + dateTo;
+                            
+                            // Value of dates depends on which date is selected.
+                            if (dateOneTime == "") {
+                                var myDates = dateContinuous;
+                            } else {
+                                var myDates = dateOneTime;
+                            }
+                            var myLocation = $('#location').val();
+                            var myDescription = $('#description').val();
+                            
+                            // SKILLS
+                            var skilledChoiceNo = $('#skilled-no').val();
+                            if (skilledChoiceNo != "") {
+                                var mySkills = $('#skill-description').val();
+                            }
+                        
+                            var myTags = $('#filter-tags').val();
+                            
+                            /**
+                             * Validate Required Fields
+                             * User has to fill out the fields below. If not, a pop-up message telling the user to fill out
+                             * the required fields will appear.
+                             */
+                            if (myTitle != "" && myDates != "" && myLocation != "" && myDescription != "" && myTags != "" ) {
+
+                                if (skilledChoiceNo == null) {
+                                    push.set({
+                                    title: myTitle,
+                                    dates: myDates,
+                                    location: myLocation,
+                                    description: myDescription,
+                                    tags: myTags
+                                    })
+                                } else {
+                                    push.set({
+                                    title: myTitle,
+                                    dates: myDates,
+                                    location: myLocation,
+                                    description: myDescription,
+                                    skills: mySkills,
+                                    tags: myTags
+                                    })
+                                }
+
+                                var postId = push.key;
+                                console.log(postId);
+
+                                // Adding the created post ID under the user's active posts.
+                                var userPost = firebase.database().ref('users/' + user.uid).child('activePosts');
+                                userPost.update({[postId] : "0"});
+                                console.log(userPost);
+                            
+                                window.alert("Your post has been successfully created!");
+                                window.location.href = "landing.html";
+                            } else {
+                                window.alert("Please fill out all required fields!");
+                            }
+                        }});
+                    
+                    });
+            
+            </script>
+        </article>
+
+    </div>
+
+    <!-- Signs the user out -->
+    <script type="text/javascript">
+        document.getElementById("sign-out").onclick = function () {
+            firebase.auth().signOut()
+            
+            location.href = "./index.html";
+        };
+    </script>
+
+</body>
+
+</html>

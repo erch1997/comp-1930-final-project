@@ -1,0 +1,92 @@
+<!-- 
+    This page is created by:
+    BBY Team 12
+    Vicky Chung
+    Eric Chiu
+    Mikhaela Layon
+    Set C   
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HomePage</title>
+  <meta charset="utf-8"/>
+
+  <!-- Java script files -->
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+
+  <!-- CSS stylesheets -->
+  <link rel="stylesheet" type="text/css" href="./css/project.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <script src="./js/load-firebase.js"></script>
+    <div class="grid">
+
+        <!-- HEADER -->
+        <header class="header">
+            <img src="./img/logo.png" id="logo" />
+            <h1 id="name">
+                <a href="./index.html"> VolunteerGo</a>
+            </h1>
+            <button id="sign-in" class="account">SIGN IN</button>
+            <button id="sign-out" class="account">SIGN OUT</button>
+        </header>
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <ul>
+                <li id="active"><a href="./index.html">Home</a></li>
+                <li><a href="./landing.html"  id="dashboard">Dashboard</a></li>
+                <li><a href="#">Volunteers</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- CONTENT -->
+        <article class="homepage_content">
+          <form class="home-search" action="https://google.ca">
+            <input type="text" placeholder="Search for opportunities" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </article>
+
+    </div>
+    
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript">
+        document.getElementById("sign-in").onclick = function () {
+            location.href = "./login.html";
+        };
+    </script>
+    
+    <!-- Sign out authentication -->
+    <script type="text/javascript">
+        document.getElementById("sign-out").onclick = function () {
+          firebase.auth().signOut()
+          location.href = "./index.html";
+        };
+    </script>
+    
+    <!-- 
+        Changing the sign-in/sign-out button's appearance 
+        depending if user is still logged in or not. 
+    -->
+    <script type="text/javascript">
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById("sign-in").style.display = "none";
+            } else {
+                document.getElementById("sign-out").style.display = "none";
+                document.getElementById("dashboard").href = "./login.html";
+            }
+        });
+    </script>
+    
+</body>
+</html>
