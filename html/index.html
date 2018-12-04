@@ -74,8 +74,10 @@
         };
     </script>
     
-    <!-- Changing the sign-in/sign-out button's appearance 
-         depending if user is still logged in or not. -->
+    <!-- 
+        Changing the sign-in/sign-out button's appearance 
+        depending if user is still logged in or not. 
+    -->
     <script type="text/javascript">
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {

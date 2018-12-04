@@ -1,13 +1,26 @@
+<!-- This page is created by:
+
+    BBY Team 12
+    Vicky Chung
+    Eric Chiu
+    Mikhaela Layon
+    Set C
+    
+-->
 <!DOCTYPE html>
 <html>
 
 <head>
   <title>Landing</title>
   <meta charset="utf-8"/>
-  <link rel="stylesheet" type="text/css" href="../css/project.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Java script files -->
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+  <!-- CSS stylesheets -->
+  <link rel="stylesheet" type="text/css" href="../css/project.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
 </head>
 
@@ -19,7 +32,7 @@
         <header class="header">
             <img src="../img/logo.png" id="logo" />
             <h1 id="name">
-                <a href="./index.html"> VolunteerGo</a>
+                <a href="./index.html">VolunteerGo</a>
             </h1>
             <button id="sign-out" class="account">SIGN OUT</button>
         </header>
@@ -61,7 +74,6 @@
         <!-- CONTENT -->
         <article class="content" id="landing">
             <div>Hello <span id="userName"></span>, what would you like to do today?</div>
-            <!-- ADD USER'S NAME-->
         </article>
 
     </div>
@@ -76,12 +88,24 @@
     
     <!--Adds authenticated user to database--> 
     <script src="../js/add-user.js"></script>
+
+
+    <!--
+        Takes in the user's first name and displays it
+        on the page.
+    -->
     <script>
       firebase.auth().onAuthStateChanged(function(user) {
+
         if (user) {
           var output = document.getElementById('userName');
           var dbRef = firebase.database().ref("users/"+user.uid).child("name");
           output.innerText = "";
+
+          /**
+           * Going through user information and grabbing
+           * the user's first name. 
+           */
           dbRef.once('value', function(snapshot) {
             var childData = snapshot.val();
             var count = 0;
@@ -92,9 +116,11 @@
                 i = childData.length;
               }
             }
+
             var first = childData.charAt(0).toUpperCase() + childData.substring(1, count);
-            console.log(first);
+            //console.log(first);
             output.innerText += (first);
+
           }); 
         }
       });
