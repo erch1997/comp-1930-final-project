@@ -11,12 +11,13 @@
 
 <head>
   <title>View Postings</title>
-  <meta charset="utf-8"/>
-  
-   <!-- Java script files -->
+  <meta charset="utf-8" />
+
+  <!-- Java script files -->
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
 
+  <!-- CSS Stylesheets -->
   <link rel="stylesheet" type="text/css" href="../css/project.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -38,7 +39,7 @@
     <nav class="navbar">
       <ul>
         <li><a href="./index.html">Home</a></li>
-        <li id="active"><a href="./landing.html"  id="dashboard">Dashboard</a></li>
+        <li id="active"><a href="./landing.html" id="dashboard">Dashboard</a></li>
         <li><a href="#">Volunteers</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Contact</a></li>
@@ -86,7 +87,7 @@
       </div>
     </article>
   </div>
-  
+
   <!-- JAVASCRIPT -->
   <script type="text/javascript">
     document.getElementById("sign-out").onclick = function () {
@@ -97,7 +98,7 @@
 
   <!-- Shows active and inactive posts for user -->
   <script type="text/javascript">
-    firebase.auth().onAuthStateChanged(function(user){
+    firebase.auth().onAuthStateChanged(function (user) {
       var activePosts = document.getElementById('active-posts');
       var inactivePosts = document.getElementById('inactive-posts');
       var dbActivePosts = firebase.database().ref('activePosts');
@@ -107,7 +108,7 @@
       // the active and inactive posts
       if (user) {
         var userPosts = firebase.database().ref('users/' + user.uid).child('activePosts');
-        var userInactive = firebase.database().ref('users/'+user.uid).child('inactivePosts');
+        var userInactive = firebase.database().ref('users/' + user.uid).child('inactivePosts');
 
         if (userPosts.length != 0) {
           activePosts.innerHTML = "";
@@ -117,24 +118,24 @@
         }
 
         /* Shows active posts for user */
-        dbActivePosts.once('value', function(snapshot) {
-          snapshot.forEach(function(postId) {
-            userPosts.once('value', function(snap) {
-              snap.forEach(function(userPostId) {
+        dbActivePosts.once('value', function (snapshot) {
+          snapshot.forEach(function (postId) {
+            userPosts.once('value', function (snap) {
+              snap.forEach(function (userPostId) {
                 var id = userPostId.key;
-                
+
                 // Going through the database and checking which
                 // posts are made by the user themselves
                 if (id == postId.key) {
                   console.log(userPostId.key + " matches " + postId.key);
-                  postId.forEach(function(title) {
+                  postId.forEach(function (title) {
 
                     // Generating the titles of the postings made by the
                     // user and appending it to the div
                     if (title.key == 'title') {
                       console.log(title.val());
                       var postDiv = $("<div class='posts'></div>");
-                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>" 
+                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>"
                         + title.val() + "</a>");
                       $(postDiv).append(postTitle);
                       $(activePosts).append(postDiv);
@@ -148,24 +149,24 @@
         });
 
         /* Shows inactive posts for user */
-        dbInactivePosts.once('value', function(snapshot) {
-          snapshot.forEach(function(postId) {
-            userInactive.once('value', function(snap) {
-              snap.forEach(function(userPostId) {
+        dbInactivePosts.once('value', function (snapshot) {
+          snapshot.forEach(function (postId) {
+            userInactive.once('value', function (snap) {
+              snap.forEach(function (userPostId) {
                 var id = userPostId.val();
 
                 // Going through the database and checking which
                 // posts are made by the user themselves
                 if (id == postId.key) {
                   console.log(userPostId.val() + " matches " + postId.key);
-                  postId.forEach(function(title) {
+                  postId.forEach(function (title) {
 
-                     // Generating the titles of the postings made by the
+                    // Generating the titles of the postings made by the
                     // user and appending it to the div
                     if (title.key == 'title') {
                       console.log(title.val());
                       var postDiv = $("<div class='posts'></div>");
-                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>" 
+                      var postTitle = $("<a href='preview.html' onClick='setPreview(this.id)'>"
                         + title.val() + "</a>");
                       $(postDiv).append(postTitle);
                       $(inactivePosts).append(postDiv);
@@ -188,13 +189,14 @@
   -->
   <script type="text/javascript">
     function setPreview(postId) {
-      firebase.auth().onAuthStateChanged(function(user){
+      firebase.auth().onAuthStateChanged(function (user) {
         var userPreview = firebase.database().ref('users/' + user.uid);
         if (user) {
-          userPreview.update({preview : postId});
+          userPreview.update({ preview: postId });
         }
       });
     }
   </script>
 </body>
+
 </html>
