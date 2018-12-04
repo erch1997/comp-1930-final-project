@@ -79,14 +79,14 @@
         <!-- CONTENT -->
         <article class="content">
             <form id="post-creation-form" method="post">
-
-                <label for="title">Title </label>
+                <h1 class="page-title">Create New Post</h1><hr/>
+                <label for="title">Title* </label>
                 <br>
                 <input type="text" id="title" name="title" value="" required/>
 
                 <!-- Event Duration Buttons -->
                 <br>
-                <label>Choose event duration</label>
+                <label>Choose event duration*</label>
                 <br>
                 <label>One time <input type="radio" name="date-duration" id="one-time" value="onetime" onclick="showDateSelection();"></label>
                 <label>Continuous <input type="radio" name="date-duration" id="continuous" value="continuous" onclick="showContinuousSelection();"></label>
@@ -110,11 +110,11 @@
 
                 <!--Location and Description fields-->
                 <br>
-                <label for="location">Location </label> <br>
+                <label for="location">Location* </label> <br>
                 <input type="text" id="location" name="location" value="" required/>
                 <br>
-                <label for="description">Description </label><br>
-                <input type="text" id="description" name="description" value="" required/>
+                <label for="description">Description* </label><br>
+                <textarea type="text" id="description" name="description" value="" required></textarea>
 
                 <!-- Skills Description fields -->
                 <br>
@@ -131,7 +131,7 @@
 
                 <!--Filter tags field-->
                 <div id="tags">
-                    <label for="filter-tags">Filters / Tags</label>
+                    <label for="filter-tags">Filters / Tags*</label>
                     <br>
                     <input type="text" id="filter-tags" name="filter-tags" value="" required/>
                 </div>
