@@ -95,19 +95,10 @@
                     <br>
 
                     <!-- Single Date Picker -->
-                    <input type="text" id="date" name="date" value="11/24/1984" />
-                    <script>
-                        $(function () {
-                            $('input[name="date"]').daterangepicker({
-                                singleDatePicker: true,
-                                showDropdowns: true,
-                                minYear: 1901,
-                                maxYear: parseInt(moment().format('YYYY'), 10)
-                            }, function (start, end, label) {
-                                console.log("A new date selection was made: " + start.format('YYYY-MM-DD'));
-                            });
-                        });
-                    </script>
+                    <input type="date" name="date" id="date">
+                    
+                    
+
                 </div>
 
                 <!-- When "Continuous" is selected -->
@@ -116,16 +107,9 @@
                     <br>
 
                     <!-- Date range picker -->
-                    <input type="text" id="daterange" name="daterange" value="01/01/2018 - 11/24/2018" />
-                    <script>
-                        $(function () {
-                            $('input[name="daterange"]').daterangepicker({
-                                opens: 'left'
-                            }, function (start, end, label) {
-                                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-                            });
-                        });
-                    </script>
+                    <input type="date" name="daterange" id="daterangefrom">
+                    <input type="date" name="daterange" id="daterangeto">
+
                 </div>
 
                 <!--Location and Description fields-->
@@ -176,11 +160,15 @@
                             var myTitle = $('#title').val();
                             // DATES
                             var dateOneTime = $("#date").val();
-                            var dateContinuous = $('#daterange').val();
+                            
+                            var dateFrom = $('#daterangefrom').val();
+                            var dateTo = $('#daterangeto').val();
+                            var dateContinuous = 'From: ' + dateFrom + '<br>' + 'To: ' + dateTo;
+                            
                             if (dateOneTime == "") {
-                                var myDates = $('#daterange').val();    
+                                var myDates = dateContinuous;
                             } else {
-                                var myDates = $('#date').val();
+                                var myDates = dateOneTime;
                             }
                             var myLocation = $('#location').val();
                             var myDescription = $('#description').val();
@@ -193,7 +181,7 @@
                             var myTags = $('#filter-tags').val();
                             
                             // Validate Required Fields
-                            if (myTitle != "" && myDates != "" && myLocation != "" && myDescription != "" && myTags != ""){
+                            if (myTitle != "" && myDates != "" && myLocation != "" && myDescription != "" && myTags != "" ) {
 
                                 if (skilledChoiceNo == null) {
                                     push.set({
