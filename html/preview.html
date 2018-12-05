@@ -18,19 +18,19 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
 
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" type="text/css" href="./css/project.css">
+  <link rel="stylesheet" type="text/css" href="../css/project.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <script src="./js/load-firebase.js"></script>
+    <script src="../js/load-firebase.js"></script>
     <div class="grid">
 
         <!-- HEADER -->
         <header class="header">
-            <img src="./img/logo.png" id="logo" />
+            <img src="../img/logo.png" id="logo" />
             <h1 id="name">
-                <a href="./index.html"> VolunteerGo</a>
+                <a href="../index.html"> VolunteerGo</a>
             </h1>
             <button id="sign-out" class="account">SIGN OUT</button>
         </header>
@@ -38,7 +38,7 @@
         <!-- NAVBAR -->
         <nav class="navbar">
             <ul>
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li id="active"><a href="./landing.html"  id="dashboard">Dashboard</a></li>
                 <li><a href="#">Volunteers</a></li>
                 <li><a href="#">About Us</a></li>
@@ -104,7 +104,7 @@
     <script type="text/javascript">
         document.getElementById("sign-out").onclick = function () {
             firebase.auth().signOut()
-            location.href = "./index.html";
+            location.href = "../index.html";
         };
         $(".content div, #post-title").click( function() {
             $(".content > * > * > *, #post-title").removeClass("edit");
